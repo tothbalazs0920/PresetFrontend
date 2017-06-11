@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AuthService } from './user/auth.service';
+import { CustomAuthService } from './user/auth.service';
 import { environment } from './../../environments/environment';
 
 @Component({
@@ -10,7 +10,7 @@ import { environment } from './../../environments/environment';
 export class AppComponent {
   title = 'Presets';
 
-  constructor(private authService: AuthService) { }
+  constructor(private CustomAuthService: CustomAuthService) { }
 
   redirect() {
     window.location.href = environment.apiRoot + '/auth/google';

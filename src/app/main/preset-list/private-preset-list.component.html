@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-default" routerLink="/upload" *ngIf="authService.loggedIn()">Upload Preset</button>
-<button type="button" class="btn btn-default" (click)=authService.login() *ngIf="!authService.loggedIn()">Upload Preset</button>
+<button type="button" class="btn btn-default" routerLink="/upload" *ngIf="CustomAuthService.loggedIn()">Upload Preset</button>
+<button type="button" class="btn btn-default" (click)=CustomAuthService.login() *ngIf="!CustomAuthService.loggedIn()">Upload Preset</button>
 <h3 class="text-center">Prersets and profiles</h3>
 
 <div class="col-sm-4" *ngFor="let preset of presets">

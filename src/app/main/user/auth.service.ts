@@ -3,12 +3,9 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthService {
+export class CustomAuthService {
 
   constructor(private router: Router) {
-  }
-
-  login() {
   }
 
   logout() {

@@ -86,11 +86,11 @@ export class PresetService {
       .delete(this.presetUpdateUrl + '/' + presetId)
       .toPromise()
       .then(response => console.log(response))
-      .catch(this.handleError);
+      .catch(error => this.handleError(error));
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
+    console.log('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }

@@ -1,6 +1,6 @@
-import { AuthService } from "../user/auth.service";
+import { CustomAuthService } from "../user/auth.service";
 
-export class AuthServiceMock extends AuthService {
+export class CustomAuthServiceMock extends CustomAuthService {
 
     constructor() {
         super(null);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../user/auth.service';
+import { CustomAuthService } from './../user/auth.service';
 import { Preset } from './../preset/preset';
 import { PresetService } from './../preset/preset.service';
 import { AudioService } from './../audio-player/audio.service';
@@ -17,7 +17,7 @@ export class PrivatePresetListComponent extends PresetListComponent implements O
 
     constructor(
         private presetService: PresetService,
-        private authService: AuthService,
+        private CustomAuthService: CustomAuthService,
         private AudioService: AudioService,
         private router: Router) {
         super(AudioService);

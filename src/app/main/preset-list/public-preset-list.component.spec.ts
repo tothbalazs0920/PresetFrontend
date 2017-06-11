@@ -9,7 +9,7 @@ import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/of';
 import { PresetService } from "../preset/preset.service";
 import { AudioService } from "../audio-player/audio.service";
-import { AuthService } from "../user/auth.service";
+import { CustomAuthService } from "../user/auth.service";
 import { PresetList } from './preset-list.interface';
 import { Preset } from './../preset/preset';
 
@@ -27,7 +27,7 @@ describe('PublicPresetListComponent', () => {
             providers: [
                 { AudioService },
                 { PresetService },
-                { AuthService },
+                { CustomAuthService },
                 { Router },
                 { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'pageNumber': 1 }]) } },
             ]

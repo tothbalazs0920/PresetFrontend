@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Preset } from './../preset/preset';
-import { AuthService } from './../user/auth.service'
+import { CustomAuthService } from './../user/auth.service'
 import { PresetService } from './../preset/preset.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -26,7 +26,7 @@ export class UploadComponent {
     technologies = ['Kemper', 'Axe Fx II', 'AX8', 'FX-8', 'Helix', 'G-system', 'Bias'];
 
     constructor(
-        private authService: AuthService,
+        private CustomAuthService: CustomAuthService,
         private presetService: PresetService,
         private router: Router,
         private activatedRoute: ActivatedRoute) {

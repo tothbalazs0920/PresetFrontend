@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-default" routerLink="/upload" *ngIf="authService.loggedIn()">Upload Preset</button>
-<button type="button" class="btn btn-default" (click)="this.modal.open();" *ngIf="!authService.loggedIn()">Upload Preset</button>
+<button type="button" class="btn btn-default" routerLink="/upload" *ngIf="CustomAuthService.loggedIn()">Upload Preset</button>
+<button type="button" class="btn btn-default" (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Upload Preset</button>
 <h3 class="text-center">Guitar Tone Finder</h3>
 
 <form (submit)="onSubmit(term.value, 1)">
@@ -56,7 +56,7 @@
 
 <modal #loginModal>
   <modal-body>
-    <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!authService.loggedIn()">
+    <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">
         Login with Google
       </button>
   </modal-body>
