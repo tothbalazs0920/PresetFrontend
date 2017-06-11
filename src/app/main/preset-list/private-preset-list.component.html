@@ -1,0 +1,24 @@
+<button type="button" class="btn btn-default" routerLink="/upload" *ngIf="authService.loggedIn()">Upload Preset</button>
+<button type="button" class="btn btn-default" (click)=authService.login() *ngIf="!authService.loggedIn()">Upload Preset</button>
+<h3 class="text-center">Prersets and profiles</h3>
+
+<div class="col-sm-4" *ngFor="let preset of presets">
+  <div class="panel panel-default preset">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{preset.name}}</h3>
+      <h5 class="pull-left" (click)="editPreset(preset._id)">Edit</h5>
+      <h5 class="pull-right" (click)="deletePreset(preset._id)">Delete</h5>
+    </div>
+    <div class="panel-body">
+      <div class="two-lines"> {{preset.description}} </div>
+      <audio-player (play)="handlePlay(preset._id, preset.audioFileId)" (pause)="handlePause(preset._id)" [showPause]="showPause(preset._id)"
+        [showPlay]="showPlay(preset._id)"></audio-player>
+    </div>
+    <div class="panel-footer">
+      <ul class="list-inline">
+        <li><a class="btn btn-lg">{{preset.technology}}</a></li>
+        <li class="pull-right"><a (click)="download(preset.presetId)" class="btn btn-success">Download</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

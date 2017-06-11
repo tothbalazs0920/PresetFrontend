@@ -1,0 +1,104 @@
+<div>
+    <form #presetForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+
+            <input type="text" id="name" class="form-control" required minlength="2" maxlength="44" name="name" [(ngModel)]="preset.name"
+                #name="ngModel">
+
+            <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+                <div [hidden]="!name.errors.required">
+                    Name is required
+                </div>
+                <div [hidden]="!name.errors.minlength">
+                    Name must be at least 2 characters long.
+                </div>
+                <div [hidden]="!name.errors.maxlength">
+                    Name cannot be more than 44 characters long.
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.description" name="description" id="description">
+        </div>
+        <div class="form-group">
+            <label for="amp">Amplifier</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
+        </div>
+        <div class="form-group">
+            <label for="cabinet">Cabinet</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
+        </div>
+        <div class="form-group">
+            <label for="band">Band/Artist</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.author" name="author" id="author">
+        </div>
+        <div class="form-group">
+            <label for="album">Album</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.album" name="album" id="album">
+        </div>
+        <div class="form-group">
+            <label for="band">Song Title</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.songTitle" name="songTitle" id="songTitle">
+        </div>
+        <div class="form-group">
+            <label for="description">Technology</label>
+            <div>
+                <select name="technology" id="technology" [(ngModel)]="preset.technology" required #technology="ngModel">
+                <option *ngFor="let technology of technologies" [value]="technology" >{{technology}}</option>
+      </select>
+                <div *ngIf="technology.errors && technology.touched" class="alert alert-danger">
+                    <div [hidden]="!technology.errors.required">Technology is required</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="description">Mp3 sample:</label>
+            <div>{{preset.originalAudoFileName}}</div>
+            <input type="file" ng2FileSelect name="file" [uploader]="uploader" />
+            <table class="table">
+                <tr *ngFor="let item of uploader.queue">
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Preset/Profile file:</label>
+            <div>{{preset.originalPerestFileName}}</div>
+            <input type="file" ng2FileSelect name="presetFile" [uploader]="presetUploader" />
+            <table class="table">
+                <tr *ngFor="let item of presetUploader.queue">
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': presetUploader.progress + '%' }"></div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!presetForm.form.valid" (click)="save()">Save</button>
+    </form>
+</div>
+
+<div>
+    <modal #myModal>
+        <modal-body>
+            Saved
+        </modal-body>
+    </modal>
+</div>

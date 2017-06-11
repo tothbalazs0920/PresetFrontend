@@ -1,0 +1,26 @@
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/presets">{{title}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li>
+        <a routerLink="/profile" *ngIf="authService.loggedIn()" routerLinkActive="active">Uploaded presets</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+      <button class="loginBtn loginBtn--google" onclick="location.href = 'http://localhost:3001/auth/google'"*ngIf="!authService.loggedIn()">
+        Login with Google
+      </button>
+      </li>
+      <li>
+        <button class="loginBtn loginBtn--google" (click)=authService.logout() *ngIf="authService.loggedIn()">Log Out</button>
+      </li>
+    </ul>
+  </nav>
+  <div class="col-sm-12">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

@@ -1,0 +1,66 @@
+[
+    {
+            "_id": "58c70140cf35d3cb6f3dbf3a",
+            "id": 12231,
+            "name": "Pantera - Walk",
+            "technology": "Axe-Fx II",
+            "presetAuthor": "Balazs",
+            "lead": true,
+            "clean": false,
+            "rythm": false,
+            "author": "Pantera",
+            "album": "VulgarDisplayofPower",
+            "songTitle": "Walk",
+            "preset": "",
+            "img": "",
+            "currency": "USD",
+            "price": 299.99,
+            "description": "The Playstation4 is the next gen console toown.With the best games and online experience.",
+            "audioFileId": "Pantera_Walk.mp3",
+            "email": "tothbalazs0920@gmail.com",
+            "michrophones": [
+                "sm57"
+        ],
+            "cabinet": [
+                "Randall"
+        ],
+            "amp": [
+                "Randall"
+        ],
+            "genre": [
+                "metal"
+        ]
+    },
+    {
+            "_id": "58c70140cf35d3cb6f3dbf3b",
+            "id": 12234,
+            "name": "Iron Maiden - Somewhere in time",
+            "technology": "Axe-Fx II",
+            "presetAuthor": "Balazs",
+            "lead": false,
+            "clean": true,
+            "rythm": false,
+            "author": "Pantera",
+            "album": "Pieceofmind",
+            "songTitle": "Trooper",
+            "preset": "",
+            "img": "",
+            "currency": "USD",
+            "description": "The Note7 has been fixed and will no longer explode.Getitan amazing price!",
+            "price": 899.99,
+            "audioFileId": "Somwhere_in_time.mp3",
+            "email": "tothbalazs0920@gmail.com",
+            "michrophones": [
+                "sm57"
+        ],
+            "cabinet": [
+                "Marshall"
+        ],
+            "amp": [
+                "Marshall"
+        ],
+            "genre": [
+                "metal"
+        ]
+    }
+]

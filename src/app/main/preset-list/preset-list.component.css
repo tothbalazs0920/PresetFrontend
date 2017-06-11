@@ -1,0 +1,33 @@
+.panel-body {
+	min-height: 100px;
+}
+
+.two-lines {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 16px;     /* fallback */
+   max-height: 32px;      /* fallback */
+   -webkit-line-clamp: 1; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+
+.pageNumber {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid lightgray;
+  background-color: #F5F5F5;
+  outline: none;
+}
+
+
+.userProfilePicture {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
