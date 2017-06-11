@@ -6,13 +6,13 @@ import 'rxjs/add/operator/toPromise';
 
 import { User } from './../user/user';
 import { Headers, RequestOptions } from '@angular/http';
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class UserService {
-    private addUserUrl = 'http://localhost:3001/api/user';
+    private addUserUrl = environment.apiRoot + '/api/user';
 
     constructor(private http: Http, private authHttp: AuthHttp) { }
-
 
     private extractData(res: Response) {
         let body = res.json();

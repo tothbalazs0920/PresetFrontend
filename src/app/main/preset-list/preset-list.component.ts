@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AudioService } from './../audio-player/audio.service';
-
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-preset-list'
@@ -47,7 +47,7 @@ export class PresetListComponent {
   }
 
   download(presetId: string) {
-    return window.open('http://localhost:3001/api/presetfile/' + presetId);
+    return window.open(environment.apiRoot + '/api/presetfile/' + presetId);
   }
 
 }

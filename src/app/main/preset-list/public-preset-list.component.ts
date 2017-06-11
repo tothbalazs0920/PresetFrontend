@@ -9,6 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { environment } from './../../../environments/environment';
 
 @Component({
     selector: 'preset-list',
@@ -89,5 +90,9 @@ export class PublicPresetListComponent extends PresetListComponent implements On
 
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
+    }
+
+    redirect() {
+        window.location.href = environment.apiRoot + '/auth/google';
     }
 }

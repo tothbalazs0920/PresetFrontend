@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class AudioFileService {
-  private URL = 'http://localhost:3001/api/audio/';
+  private URL = environment.apiRoot + '/api/audio/';
   constructor(
   ) { }
 

@@ -7,6 +7,7 @@ import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { environment } from './../../../environments/environment';
 
 @Component({
     selector: 'simple-upload',
@@ -14,8 +15,8 @@ import 'rxjs/add/observable/of';
 })
 export class UploadComponent {
     preset: Preset;
-    private URL = 'http://localhost:3001/api/upload';
-    private presetUploadUrl = 'http://localhost:3001/api/presetfile/upload';
+    private URL = environment.apiRoot + '/api/upload';
+    private presetUploadUrl = environment.apiRoot + '/api/presetfile/upload';
     public uploader: FileUploader;
     public presetUploader: FileUploader;
     public hasBaseDropZoneOver: boolean = false;

@@ -10,7 +10,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
-      <button class="loginBtn loginBtn--google" onclick="location.href = 'http://localhost:3001/auth/google'"*ngIf="!authService.loggedIn()">
+      <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!authService.loggedIn()">
         Login with Google
       </button>
       </li>

@@ -3,6 +3,7 @@ import { Http, Response, URLSearchParams } from '@angular/http';
 import { AuthHttp } from './../auth-http/auth-http';
 import { Observable } from 'rxjs/Observable';
 import { PresetList } from './../preset-list/preset-list.interface';
+import { environment } from './../../../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -11,11 +12,11 @@ import * as _ from 'underscore';
 
 @Injectable()
 export class PresetService {
-  private presetListUrl = 'http://localhost:3001/api/presets';
-  private presetUpdateUrl = 'http://localhost:3001/api/preset';
-  private personalPresetListUrl = 'http://localhost:3001/api/preset/profile';
-  private downloadPresetUrl = 'http://localhost:3001/api/presetfile/';
-  private esSearchUrl = 'http://localhost:3001/api/search/';
+  private presetListUrl = environment.apiRoot + '/api/presets';
+  private presetUpdateUrl = environment.apiRoot + '/api/preset';
+  private personalPresetListUrl = environment.apiRoot + '/api/preset/profile';
+  private downloadPresetUrl = environment.apiRoot + '/api/presetfile/';
+  private esSearchUrl = environment.apiRoot + '/api/search/';
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
 
