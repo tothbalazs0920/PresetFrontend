@@ -13,7 +13,7 @@ const forceSSL = function() {
   }
 }
 
-app.use(forceSSL);
+//app.use(forceSSL);
 app.use(express.static(__dirname + '/dist'));
 
 // For all GET requests, send back index.html
