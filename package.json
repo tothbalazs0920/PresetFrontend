@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "license": "",
   "angular-cli": {},
+  "engines": {
+    "node": "6.10.3",
+    "npm": "3.10.10"
+  },
   "scripts": {
-    "start": "ng serve",
+    "start": "node server.js",
+    "postinstall": "ng build --aot -prod",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor",
-    "build": "ng build -o ../server/dist"
+    "e2e": "protractor"
   },
   "private": true,
   "dependencies": {
@@ -33,11 +37,13 @@
     "rxjs": "5.2.0",
     "ts-helpers": "^1.1.1",
     "underscore": "^1.8.3",
-    "zone.js": "^0.8.5"
+    "zone.js": "^0.8.5",
+    "@angular/compiler-cli": "2.2.3",
+    "angular-cli": "1.0.0-beta.15",
+    "express": "4.14.3"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
-    "angular-cli": "1.0.0-beta.15",
     "codelyzer": "~0.0.26",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
