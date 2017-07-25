@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AudioService } from './../audio-player/audio.service';
 import { environment } from './../../../environments/environment';
+import { AwsService } from './../aws/aws.service';
 
 @Component({
   selector: 'app-preset-list'
@@ -9,9 +10,10 @@ import { environment } from './../../../environments/environment';
 export class PresetListComponent {
   playing = false;
   current?: string;
-  
+
   constructor(
-    protected audioService: AudioService) {
+    protected audioService: AudioService,
+    protected awsService: AwsService) {
   }
 
   handlePlay(_id: string, audioFileId: number) {
@@ -46,8 +48,8 @@ export class PresetListComponent {
     return false;
   }
 
-  download(presetId: string) {
-    return window.open(environment.apiRoot + '/api/presetfile/' + presetId);
+  download(presetFileId: string) {
+    return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
   }
 
 }

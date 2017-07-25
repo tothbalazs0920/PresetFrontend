@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { environment } from './../../../environments/environment';
+import { AwsService } from './../aws/aws.service';
 
 @Component({
     selector: 'preset-list',
@@ -37,9 +38,10 @@ export class PublicPresetListComponent extends PresetListComponent implements On
         private presetService: PresetService,
         private CustomAuthService: CustomAuthService,
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        protected awsService: AwsService
     ) {
-        super(AudioService);
+        super(AudioService, awsService);
     }
 
     ngOnInit(): void {

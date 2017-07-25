@@ -15,7 +15,6 @@ export class PresetService {
   private presetListUrl = environment.apiRoot + '/api/presets';
   private presetUpdateUrl = environment.apiRoot + '/api/preset';
   private personalPresetListUrl = environment.apiRoot + '/api/preset/profile';
-  private downloadPresetUrl = environment.apiRoot + '/api/presetfile/';
   private esSearchUrl = environment.apiRoot + '/api/search/';
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
@@ -52,7 +51,7 @@ export class PresetService {
       .catch(this.handleError);
   }
 
-  getEsSearchResult(q: string = '*', page = 1, technology:string) {
+  getEsSearchResult(q: string = '*', page = 1, technology: string) {
     let params: URLSearchParams = new URLSearchParams();
     if (q) {
       params.set('q', q);
@@ -60,7 +59,7 @@ export class PresetService {
     if (page) {
       params.set('page', String(page));
     }
-    if(technology) {
+    if (technology) {
       params.set('technology', technology);
     }
 
@@ -68,17 +67,13 @@ export class PresetService {
   }
 
   mapSearchResult(result) {
-        let presets:Preset[] = [];
-        _(result.hits.hits).each(hit => {
-            let preset = hit._source;
-            preset._id = hit._id;
-            presets.push(preset);
-        });
-        return presets;
-    }
-
-  downloadPreset(presetId: string) {
-    return this.downloadPresetUrl + presetId;
+    let presets: Preset[] = [];
+    _(result.hits.hits).each(hit => {
+      let preset = hit._source;
+      preset._id = hit._id;
+      presets.push(preset);
+    });
+    return presets;
   }
 
   deletePreset(presetId: string) {
