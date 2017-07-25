@@ -15,8 +15,9 @@ import { AudioFileService } from './audio-player/audio-file.service';
 import { UserService } from './user/user.service';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { FileUploadModule } from 'ng2-file-upload';
-import {  Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
+import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { AuthHttp } from './auth-http/auth-http';
+import { AwsService } from './aws/aws.service';
 
 @NgModule({
   imports: [
@@ -33,7 +34,7 @@ import { AuthHttp } from './auth-http/auth-http';
     AudioPlayer
   ],
   providers: [
-  {
+    {
       provide: AuthHttp,
       useFactory: (backend: XHRBackend, options: RequestOptions) => {
         return new AuthHttp(backend, options);
@@ -45,7 +46,8 @@ import { AuthHttp } from './auth-http/auth-http';
     AuthGuard,
     AudioService,
     AudioFileService,
-    UserService
+    UserService,
+    AwsService
   ],
   bootstrap: [AppComponent]
 })

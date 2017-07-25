@@ -48,7 +48,7 @@
             <div>
                 <select name="technology" id="technology" [(ngModel)]="preset.technology" required #technology="ngModel">
                 <option *ngFor="let technology of technologies" [value]="technology" >{{technology}}</option>
-      </select>
+            </select>
                 <div *ngIf="technology.errors && technology.touched" class="alert alert-danger">
                     <div [hidden]="!technology.errors.required">Technology is required</div>
                 </div>
