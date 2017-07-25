@@ -88,7 +88,7 @@ export class UploadComponent {
             this.preset.originalPerestFileName = this.presetUploader.queue[0].file.name;;
             let type = this.presetUploader.queue[0].file.type;
             this.presetUploader.queue[0].alias = 'presetFile';
-            this.awsService.getPresignedUrl(s3Name, type, false)
+            this.awsService.getPresignedUrl(s3Name, type, false, 'putObject')
                 .then(response => {
                     this.presetUploader.setOptions({ headers: [
                         { name: 'Content-Type', value: type },
@@ -118,7 +118,7 @@ export class UploadComponent {
         this.preset.originalAudoFileName = this.uploader.queue[0].file.name;
         this.uploader.queue[0].file.name = s3Name;
         let type = this.uploader.queue[0].file.type;
-        this.awsService.getPresignedUrl(s3Name, type, true)
+        this.awsService.getPresignedUrl(s3Name, type, true, 'putObject')
             .then(response => {
                 this.uploader.setOptions({ headers: [{ name: 'Content-Type', value: type }] });
                 this.uploader.queue[0].url = response.signedRequest;
