@@ -1,0 +1,12 @@
+.navbar-right { 
+    margin-right: 0px !important
+}
+
+#login {
+    padding-top:3px !important;
+    padding-right: 15px;
+}
+
+.nav a {
+    color: #777;
+}

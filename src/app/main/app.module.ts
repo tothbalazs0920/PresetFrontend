@@ -12,12 +12,12 @@ import { CustomAuthService } from './user/auth.service';
 import { AuthGuard } from './user/auth-guard.service';
 import { AudioService } from './audio-player/audio.service';
 import { AudioFileService } from './audio-player/audio-file.service';
-import { UserService } from './user/user.service';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { AuthHttp } from './auth-http/auth-http';
 import { AwsService } from './aws/aws.service';
+import { SearchField } from './search-field/search-field.component';
 
 @NgModule({
   imports: [
@@ -31,7 +31,8 @@ import { AwsService } from './aws/aws.service';
   declarations: [
     AppComponent,
     routedComponents,
-    AudioPlayer
+    AudioPlayer,
+    SearchField
   ],
   providers: [
     {
@@ -46,7 +47,6 @@ import { AwsService } from './aws/aws.service';
     AuthGuard,
     AudioService,
     AudioFileService,
-    UserService,
     AwsService
   ],
   bootstrap: [AppComponent]

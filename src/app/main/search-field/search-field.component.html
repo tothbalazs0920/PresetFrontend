@@ -1,0 +1,20 @@
+<form class="navbar-form navbar-left" (submit)="onSubmit(term.value)">
+    <div class="input-group input-group-sm">
+        <input #term [value]="queryObject.q"  type="text" class="form-control" placeholder="Search" autofocus>
+        <div class="input-group-btn">
+            <button type="submit" class="btn btn btn-default btn-flat"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+
+<!--
+    <div>
+        <label>Technology:</label>
+        <div>
+            <select [(ngModel)]="queryObject.technology" name="technology">
+                <option *ngFor="let technology of technologies" [value]="technology" >{{technology}}</option>
+      </select>
+        </div>
+    </div>
+    -->
+</form>

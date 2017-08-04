@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CustomAuthService } from './../user/auth.service';
 
 import { Preset } from './../preset/preset';
@@ -8,7 +8,6 @@ import { PresetListComponent } from './preset-list.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
-import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
 
@@ -29,9 +28,6 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     };
     private _queryParamsSubscription;
     pages: any[] = [];
-
-    @ViewChild('loginModal')
-    modal: ModalComponent;
 
     constructor(
         private AudioService: AudioService,
@@ -75,16 +71,6 @@ export class PublicPresetListComponent extends PresetListComponent implements On
             error => this.errorMessage = <any>error);
     }
 
-    onSubmit(q: string, page: number) {
-        if (this.queryObject.page < 1 || this.queryObject.page > this.pages.length) {
-            return;
-        }
-        this.queryObject.q = q;
-        this.queryObject.page = page;
-        this.router.navigate(['/presets'], { queryParams: this.queryObject });
-    }
-
-
     getPageWithSearchResult(page: number): void {
         if (this.queryObject.page < 1 || this.queryObject.page > this.pages.length) {
             return;
@@ -92,9 +78,5 @@ export class PublicPresetListComponent extends PresetListComponent implements On
 
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
-    }
-
-    redirect() {
-        window.location.href = environment.apiRoot + '/auth/google';
     }
 }

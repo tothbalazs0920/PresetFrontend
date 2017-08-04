@@ -1,14 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { CustomAuthService } from './user/auth.service';
 import { environment } from './../../environments/environment';
+import { SearchField } from './search-field/search-field.component';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @Component({
   selector: 'presets',
   templateUrl: 'app.html',
-  styles: ['.navbar-right { margin-right: 0px !important}']
+  styleUrls: ['app.css']
 })
 export class AppComponent {
-  title = 'Presets';
+
+  @ViewChild('loginModal')
+  modal: ModalComponent;
 
   constructor(private CustomAuthService: CustomAuthService) { }
 

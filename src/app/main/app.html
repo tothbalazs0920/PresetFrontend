@@ -1,26 +1,29 @@
-<div class="container">
-  <nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" routerLink="/presets">{{title}}</a>
+      <a class="navbar-brand" routerLink="/presets">Guitar Tone Finder</a>
     </div>
+    <search-field></search-field>
     <ul class="nav navbar-nav">
-      <li>
-        <a routerLink="/profile" *ngIf="CustomAuthService.loggedIn()" routerLinkActive="active">Uploaded presets</a>
-      </li>
+      <li><a routerLink="/upload" *ngIf="CustomAuthService.loggedIn()">Upload</a></li>
+      <li><a (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Upload</a></li>
+      <li><a routerLink="/profile" *ngIf="CustomAuthService.loggedIn()" routerLinkActive="active">My profiles and presets</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li>
-      <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">
+      <li><a (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login with Google</a></li>
+      <li><a (click)=CustomAuthService.logout() *ngIf="CustomAuthService.loggedIn()">Log Out</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="col-sm-12">
+  <router-outlet></router-outlet>
+</div>
+
+<modal #loginModal>
+  <modal-body>
+    <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">
         Login with Google
       </button>
-      </li>
-      <li>
-        <button class="loginBtn loginBtn--google" (click)=CustomAuthService.logout() *ngIf="CustomAuthService.loggedIn()">Log Out</button>
-      </li>
-    </ul>
-  </nav>
-  <div class="col-sm-12">
-    <router-outlet></router-outlet>
-  </div>
-
-</div>
+  </modal-body>
+</modal>
