@@ -28,7 +28,7 @@
 <div class="row">
   <div class="text-center">
     <ul class="pagination">
-      <li *ngFor="let pageNumber of paginationNumbers" [ngClass]="{'active': isPageActive(pageNumber)}">
+      <li *ngFor="let pageNumber of paginationNumbers" [class.active]="clicked === pageNumber" (click)="clicked = pageNumber">
         <a (click)="getPageWithSearchResult(pageNumber)">{{pageNumber}}</a>
       </li>
     </ul>

@@ -19,7 +19,6 @@ import { AwsService } from './../aws/aws.service';
 export class PublicPresetListComponent extends PresetListComponent implements OnInit {
     presets: Preset[];
     total: number;
-    technologies = ['', 'Kemper', 'Axe Fx II XL+', 'AX8', 'Helix'];
     errorMessage: string;
     queryObject: any = {
         q: '',
@@ -81,9 +80,5 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     getPageWithSearchResult(page: number): void {
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
-    }
-
-    isPageActive(page: number): boolean {
-        return page === this.queryObject.page;
     }
 }
