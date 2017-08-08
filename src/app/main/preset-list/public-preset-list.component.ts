@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomAuthService } from './../user/auth.service';
 
 import { Preset } from './../preset/preset';
@@ -28,6 +28,7 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     };
     private _queryParamsSubscription;
     pages: any[] = [];
+    paginationNumbers: number[] = [];
 
     constructor(
         private AudioService: AudioService,
@@ -44,14 +45,16 @@ export class PublicPresetListComponent extends PresetListComponent implements On
         this._queryParamsSubscription = this.activatedRoute
             .queryParams
             .subscribe(
-            params => {
+            (params) => {
                 if (Object.keys(params).length === 0) {
                     this.queryObject.page = 1;
                 } else {
                     if (params['token']) {
                         localStorage.setItem("token", params['token']);
                     }
-                    this.queryObject.page = +params['page'];
+                    if (params['page']) {
+                        this.queryObject.page = params['page'];
+                    }
                     this.queryObject.q = params['q'] || '';
                     this.queryObject.technology = params['technology'] || '';
                 }
@@ -60,23 +63,27 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     }
 
     getEsSearchResult(q: string, page: number = 1, technology: string) {
-        this.presetService
+        return this.presetService
             .getEsSearchResult(q, page, technology)
             .subscribe(
             result => {
                 this.total = result.hits.total;
                 this.pages.length = Math.ceil(result.hits.total / 3);
+                this.paginationNumbers = [];
+                for (let i = 1; i <= this.pages.length; i++) {
+                    this.paginationNumbers.push(i);
+                }
                 return this.presets = this.presetService.mapSearchResult(result);
             },
             error => this.errorMessage = <any>error);
     }
 
     getPageWithSearchResult(page: number): void {
-        if (this.queryObject.page < 1 || this.queryObject.page > this.pages.length) {
-            return;
-        }
-
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
+    }
+
+    isPageActive(page: number): boolean {
+        return page === this.queryObject.page;
     }
 }
