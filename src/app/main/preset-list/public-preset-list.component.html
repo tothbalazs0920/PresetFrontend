@@ -15,6 +15,7 @@
       </div>
       <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
       <div>{{preset.presetAuthor}}</div>
+      <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + imageBaseUrl + preset.imageFileId + ')'}"></div>
       <div class="panel-footer ">
         <ul class="list-inline ">
           <li><a class="btn btn-lg ">{{preset.technology}}</a></li>

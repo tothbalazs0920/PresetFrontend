@@ -11,7 +11,7 @@ export class AwsService {
     constructor(private authHttp: AuthHttp,
         private http: Http) { }
 
-    getPresignedUrl(name: string, type: string, mp3: boolean, operation: string) {
+    getPresignedUrl(name: string, type: string, mp3: string, operation: string) {
         return this.authHttp
             .get(this.presignUrl + '?file-name=' + name + '&file-type=' + type + '&mp3=' + mp3 + '&operation=' + operation)
             .toPromise()

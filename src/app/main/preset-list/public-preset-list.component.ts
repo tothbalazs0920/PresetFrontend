@@ -28,6 +28,7 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     private _queryParamsSubscription;
     pages: any[] = [];
     paginationNumbers: number[] = [];
+    imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images/'
 
     constructor(
         private AudioService: AudioService,

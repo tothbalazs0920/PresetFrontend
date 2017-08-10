@@ -18,6 +18,7 @@ export class UploadComponent {
     preset: Preset;
     public uploader: FileUploader;
     public presetUploader: FileUploader;
+    public imageUploader: FileUploader;
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
     @ViewChild('myModal')
@@ -58,7 +59,9 @@ export class UploadComponent {
             currency: '',
             audioFileId: '',
             originalAudoFileName: '',
-            email: ''
+            email: '',
+            imageFileId: '',
+            originalImageFileName: ''
         };
         this.activatedRoute
             .params
@@ -88,15 +91,38 @@ export class UploadComponent {
             this.preset.originalPerestFileName = this.presetUploader.queue[0].file.name;;
             let type = this.presetUploader.queue[0].file.type;
             this.presetUploader.queue[0].alias = 'presetFile';
-            this.awsService.getPresignedUrl(s3Name, type, false, 'putObject')
+            this.awsService.getPresignedUrl(s3Name, type, 'preset', 'putObject')
                 .then(response => {
-                    this.presetUploader.setOptions({ headers: [
-                        { name: 'Content-Type', value: type },
-                        { name: 'Content-Disposition', value: 'filename=' +  this.preset.originalPerestFileName }
-                    ] });
+                    this.presetUploader.setOptions({
+                        headers: [
+                            { name: 'Content-Type', value: type },
+                            { name: 'Content-Disposition', value: 'filename=' + this.preset.originalPerestFileName }
+                        ]
+                    });
                     this.presetUploader.queue[0].url = response.signedRequest;
                     this.presetUploader.queue[0].method = 'PUT';
                     this.presetUploader.queue[0].upload();
+                });
+        };
+
+        this.imageUploader = new FileUploader({ url: '', disableMultipart: true });
+        this.imageUploader.onAfterAddingFile = () => {
+            const s3Name = this.generateUUID();
+            this.preset.imageFileId = s3Name;
+            this.preset.originalImageFileName = this.imageUploader.queue[0].file.name;;
+            let type = this.imageUploader.queue[0].file.type;
+            this.imageUploader.queue[0].alias = 'image';
+            this.awsService.getPresignedUrl(s3Name, type, 'image', 'putObject')
+                .then(response => {
+                    this.imageUploader.setOptions({
+                        headers: [
+                            { name: 'Content-Type', value: type },
+                            { name: 'Content-Disposition', value: 'filename=' + this.preset.originalImageFileName }
+                        ]
+                    });
+                    this.imageUploader.queue[0].url = response.signedRequest;
+                    this.imageUploader.queue[0].method = 'PUT';
+                    this.imageUploader.queue[0].upload();
                 });
         };
     }
@@ -118,7 +144,7 @@ export class UploadComponent {
         this.preset.originalAudoFileName = this.uploader.queue[0].file.name;
         this.uploader.queue[0].file.name = s3Name;
         let type = this.uploader.queue[0].file.type;
-        this.awsService.getPresignedUrl(s3Name, type, true, 'putObject')
+        this.awsService.getPresignedUrl(s3Name, type, 'mp3', 'putObject')
             .then(response => {
                 this.uploader.setOptions({ headers: [{ name: 'Content-Type', value: type }] });
                 this.uploader.queue[0].url = response.signedRequest;

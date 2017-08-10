@@ -91,6 +91,24 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="description">Image:</label>
+            <div>{{preset.originalImageFileName}}</div>
+            <input type="file" ng2FileSelect name="image" [uploader]="imageUploader" />
+            <table class="table">
+                <tr *ngFor="let item of imageUploader.queue">
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': imageUploader.progress + '%' }"></div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary" [disabled]="!presetForm.form.valid" (click)="save()">Save</button>
     </form>
 </div>

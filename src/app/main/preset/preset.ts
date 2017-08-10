@@ -24,4 +24,6 @@ export class Preset {
   audioFileId: string;
   originalAudoFileName: string;
   email: string;
+  imageFileId: string;
+  originalImageFileName: string;
 }
