@@ -4,6 +4,7 @@ import { AuthGuard } from './user/auth-guard.service';
 import { PublicPresetListComponent } from './preset-list/public-preset-list.component';
 import { PrivatePresetListComponent } from './preset-list/private-preset-list.component';
 import { UploadComponent } from './upload/upload.component';
+import { PresetComponent } from './Preset/preset.component';
 
 const appRoutes: Routes = [
   {
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
   {
     path: 'presets',
     component: PublicPresetListComponent
+  },
+  {
+    path: 'preset/:id',
+    component: PresetComponent
   },
   {
     path: 'profile',
@@ -34,4 +39,4 @@ const appRoutes: Routes = [
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, UploadComponent];
+export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, UploadComponent, PresetComponent];

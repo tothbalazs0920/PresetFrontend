@@ -4,7 +4,7 @@
   <div class="col-sm-4 " *ngFor="let preset of presets ">
     <div class="panel panel-default ">
       <div class="panel-heading ">
-        <h3 class="panel-title ">{{preset.name}}</h3>
+        <a class="panel-title" [routerLink]="['/preset', preset._id]">{{preset.name}}</a>
       </div>
       <div class="panel-body ">
         <div class="two-lines "> {{preset.description}} </div>

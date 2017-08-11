@@ -1,0 +1,22 @@
+<div class="row">
+
+    <h3>{{preset.name}}</h3>
+
+    <div> {{preset.description}} </div>
+    <div>Amplifier: {{preset.amp}}</div>
+    <div>Cabinet: {{preset.cabinet}}</div>
+
+    <p>Album: {{preset.album}} </p>
+    <p>Song title: {{preset.songTitle}}</p>
+    <p>Band/Artist: {{preset.author}}</p>
+
+    <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
+        " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
+
+    <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
+    <div>{{preset.presetAuthor}}</div>
+    <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + imageBaseUrl + preset.imageFileId + ')'}"></div>
+
+    <a class="btn btn-lg ">{{preset.technology}}</a>
+    <a (click)="download(preset.presetId) " class="btn btn-success ">Download</a>
+</div>
