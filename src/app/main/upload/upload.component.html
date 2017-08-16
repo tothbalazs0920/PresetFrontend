@@ -25,11 +25,11 @@
         </div>
         <div class="form-group">
             <label for="amp">Amplifier</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
+            <input type="text" required class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
         </div>
         <div class="form-group">
             <label for="cabinet">Cabinet</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
+            <input type="text" required class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
         </div>
         <div class="form-group">
             <label for="band">Band/Artist</label>
@@ -53,8 +53,12 @@
                     <div [hidden]="!technology.errors.required">Technology is required</div>
                 </div>
             </div>
-
         </div>
+        <div class="form-group">
+            <label for="youtubeUrl">YouTube url</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.youtubeUrl" name="youtubeUrl" id="youtubeUrl">
+        </div>
+
         <div class="form-group">
             <label for="description">Mp3 sample:</label>
             <div>{{preset.originalAudoFileName}}</div>

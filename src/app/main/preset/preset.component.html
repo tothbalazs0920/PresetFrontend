@@ -9,6 +9,14 @@
     <p>Album: {{preset.album}} </p>
     <p>Song title: {{preset.songTitle}}</p>
     <p>Band/Artist: {{preset.author}}</p>
+    <p>YouTube: {{preset.youtubeUrl}}</p>
+
+
+    <div *ngIf="preset.youtubeUrl">
+        <iframe [src] ="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" 
+        width="560" height="315" frameborder="0" allowfullscreen>
+            </iframe>
+    </div>
 
     <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
         " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>

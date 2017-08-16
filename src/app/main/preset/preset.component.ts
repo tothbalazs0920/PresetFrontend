@@ -7,8 +7,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 import { environment } from './../../../environments/environment';
-import { AwsService } from './../aws/aws.service';
 import 'rxjs/add/operator/catch';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'preset',
@@ -25,7 +25,7 @@ export class PresetComponent implements OnInit {
         private presetService: PresetService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        protected awsService: AwsService
+        private sanitizer: DomSanitizer
     ) {
 
     }
@@ -58,7 +58,8 @@ export class PresetComponent implements OnInit {
             originalAudoFileName: '',
             email: '',
             imageFileId: '',
-            originalImageFileName: ''
+            originalImageFileName: '',
+            youtubeUrl: ''
         };
         this.activatedRoute.params.subscribe(params => {
             if (params['id']) {
@@ -72,7 +73,6 @@ export class PresetComponent implements OnInit {
             }
         });
     }
-
 
     handlePlay(audioFileId: number) {
         this.audioService.play(audioFileId);
@@ -94,6 +94,10 @@ export class PresetComponent implements OnInit {
 
     download(presetFileId: string) {
         return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
+    }
+
+    getEmbeddedUrl(id: string) {
+     return 'http://www.youtube.com/embed/' + id;
     }
 
 }

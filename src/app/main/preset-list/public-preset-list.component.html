@@ -1,3 +1,4 @@
+<!--
 <p>Results: {{ total }}</p>
 
 <div class="row">
@@ -25,6 +26,53 @@
     </div>
   </div>
 </div>
+-->
+<div class="container">
+
+  <div class="mb20">
+    <h1>Search Results</h1>
+    <h2 class="lead">
+      <strong class="text-danger">{{ total }}</strong> results were found for the search for <strong class="text-danger">{{queryObject.q}}</strong>
+    </h2>
+  </div>
+
+  <section class="col-xs-12 col-sm-6 col-md-12">
+    <div *ngFor="let preset of presets ">
+      <article class="search-result row">
+        <div class="col-xs-12 col-sm-12 col-md-3">
+          <a [routerLink]="['/preset', preset._id]" title="{{preset.amp}}" class="thumbnail">
+            <img src="{{ getImageUrl(preset.imageFileId) }}"/>
+          </a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2">
+          <ul class="meta-search">
+            <div ng-if="preset.audioFileId">
+              <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
+        " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
+            </div>
+            <div ng-if="!preset.audioFileId">
+              <i class="fa fa-volume-off" aria-hidden="true"></i>
+            </div>
+            <li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
+            <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.technology}}</span></li>
+            <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.presetAuthor}}</span></li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+          <h3><a [routerLink]="['/preset', preset._id]" title="{{preset.name}}">{{preset.name}}</a></h3>
+          <p>Amplifier: {{preset.amp}}</p>
+          <p>Cabinet: {{preset.cabinet}}</p>
+          <p>{{preset.description}}
+            <p>
+              <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId)">Download</a></span>
+        </div>
+        <span class="clearfix borda"></span>
+      </article>
+    </div>
+  </section>
+</div>
+
+
 
 <div class="row">
   <div class="text-center">

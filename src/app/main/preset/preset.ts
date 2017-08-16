@@ -26,4 +26,5 @@ export class Preset {
   email: string;
   imageFileId: string;
   originalImageFileName: string;
+  youtubeUrl: string;
 }

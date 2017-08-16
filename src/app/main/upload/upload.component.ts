@@ -61,7 +61,8 @@ export class UploadComponent {
             originalAudoFileName: '',
             email: '',
             imageFileId: '',
-            originalImageFileName: ''
+            originalImageFileName: '',
+            youtubeUrl: ''
         };
         this.activatedRoute
             .params
