@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
+declare var amplitude: any;
 
 @Component({
     selector: 'preset-list',
@@ -60,9 +61,11 @@ export class PublicPresetListComponent extends PresetListComponent implements On
                 }
                 this.getEsSearchResult(this.queryObject.q, this.queryObject.page, this.queryObject.technology);
             });
+        amplitude.init('7303a1f3cd3faa5eaa7d2ebd58da1648');
     }
 
     getEsSearchResult(q: string, page: number = 1, technology: string) {
+        amplitude.getInstance().logEvent('clicked-search', {'search-term': q, 'technology':'technology'});
         return this.presetService
             .getEsSearchResult(q, page, technology)
             .subscribe(
@@ -84,7 +87,7 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     }
 
     getImageUrl(imagageId: string) {
-        if(imagageId) {
+        if (imagageId) {
             return this.imageBaseUrl + imagageId;
         }
         return 'https://www.shareicon.net/data/128x128/2016/05/13/764563_music_512x512.png';

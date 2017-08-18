@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AudioService } from './../audio-player/audio.service';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
+declare var amplitude: any;
 
 @Component({
   selector: 'app-preset-list'
 })
 
-export class PresetListComponent {
+export class PresetListComponent implements OnInit {
   playing = false;
   current?: string;
+
 
   constructor(
     protected audioService: AudioService,
     protected awsService: AwsService) {
   }
 
+  ngOnInit(): void {
+    amplitude.init('7303a1f3cd3faa5eaa7d2ebd58da1648');
+  }
+
   handlePlay(_id: string, audioFileId: number) {
+    amplitude.getInstance().logEvent('clicked-play', {'audioFileId': audioFileId, 'es_id':'_id'});
     this.current = _id;
     this.audioService.play(audioFileId);
     this.playing = true;
@@ -48,7 +55,8 @@ export class PresetListComponent {
     return false;
   }
 
-  download(presetFileId: string) {
+  download(presetFileId: string, _id: string) {
+    amplitude.getInstance().logEvent('clicked-download', {'presetFileId': presetFileId, 'es-id':'_id'});
     return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
   }
 

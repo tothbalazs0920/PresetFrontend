@@ -20,7 +20,8 @@
         "../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [
-        "../node_modules/bootstrap/js/modal.js"
+        "../node_modules/bootstrap/js/modal.js",
+        "./amplitude.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
