@@ -11,14 +11,13 @@
     <p>Band/Artist: {{preset.author}}</p>
     <p>YouTube: {{preset.youtubeUrl}}</p>
 
-
     <div *ngIf="preset.youtubeUrl">
         <iframe [src] ="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" 
         width="560" height="315" frameborder="0" allowfullscreen>
             </iframe>
     </div>
 
-    <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
+    <audio-player (play)="handlePlay(preset.audioFileId) " (pause)="handlePause(preset._id)
         " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
 
     <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>

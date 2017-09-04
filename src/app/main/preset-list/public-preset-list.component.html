@@ -1,32 +1,3 @@
-<!--
-<p>Results: {{ total }}</p>
-
-<div class="row">
-  <div class="col-sm-4 " *ngFor="let preset of presets ">
-    <div class="panel panel-default ">
-      <div class="panel-heading ">
-        <a class="panel-title" [routerLink]="['/preset', preset._id]">{{preset.name}}</a>
-      </div>
-      <div class="panel-body ">
-        <div class="two-lines "> {{preset.description}} </div>
-        <div>Amplifier: {{preset.amp}}</div>
-        <div>Cabinet: {{preset.cabinet}}</div>
-        <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
-        " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
-      </div>
-      <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
-      <div>{{preset.presetAuthor}}</div>
-      <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + imageBaseUrl + preset.imageFileId + ')'}"></div>
-      <div class="panel-footer ">
-        <ul class="list-inline ">
-          <li><a class="btn btn-lg ">{{preset.technology}}</a></li>
-          <li class="pull-right "><a (click)="download(preset.presetId) " class="btn btn-success ">Download</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
--->
 <div class="container">
 
   <div class="mb20">
@@ -47,12 +18,12 @@
         <div class="col-xs-12 col-sm-12 col-md-2">
           <ul class="meta-search">
             <div ng-if="preset.audioFileId">
-              <audio-player (play)="handlePlay(preset._id, preset.audioFileId) " (pause)="handlePause(preset._id)
+              <audio-player (play)="handlePlay(preset._id, preset.audioFileId, 'public-preset-list') " (pause)="handlePause(preset._id)
         " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
             </div>
-            <div ng-if="!preset.audioFileId">
-              <i class="fa fa-volume-off" aria-hidden="true"></i>
-            </div>
+            <!--<div ng-if="!preset.audioFileId">
+              <i class="fa fa-volume-off" aria-hidden="true"></i> 
+            </div> -->
             <li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
             <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.technology}}</span></li>
             <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.presetAuthor}}</span></li>
@@ -64,15 +35,13 @@
           <p>Cabinet: {{preset.cabinet}}</p>
           <p>{{preset.description}}
             <p>
-              <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id)">Download</a></span>
+              <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'public-preset-list')">Download</a></span>
         </div>
         <span class="clearfix borda"></span>
       </article>
     </div>
   </section>
 </div>
-
-
 
 <div class="row">
   <div class="text-center">

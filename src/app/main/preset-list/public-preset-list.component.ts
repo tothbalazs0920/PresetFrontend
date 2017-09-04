@@ -43,6 +43,7 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     }
 
     ngOnInit(): void {
+        amplitude.init(environment.amplitudeApiKey, null, { includeReferrer: true });
         this._queryParamsSubscription = this.activatedRoute
             .queryParams
             .subscribe(
@@ -61,11 +62,10 @@ export class PublicPresetListComponent extends PresetListComponent implements On
                 }
                 this.getEsSearchResult(this.queryObject.q, this.queryObject.page, this.queryObject.technology);
             });
-        amplitude.init('7303a1f3cd3faa5eaa7d2ebd58da1648');
     }
 
     getEsSearchResult(q: string, page: number = 1, technology: string) {
-        amplitude.getInstance().logEvent('clicked-search', {'search-term': q, 'technology':'technology'});
+        amplitude.getInstance().logEvent('clicked-search' + environment.postFix, { 'search-term': q, 'technology': 'technology' });
         return this.presetService
             .getEsSearchResult(q, page, technology)
             .subscribe(

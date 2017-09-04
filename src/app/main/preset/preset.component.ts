@@ -6,9 +6,10 @@ import { AudioService } from './../audio-player/audio.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
-import { environment } from './../../../environments/environment';
 import 'rxjs/add/operator/catch';
-import { DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+declare var amplitude: any;
+import { environment } from './../../../environments/environment';
 
 @Component({
     selector: 'preset',
@@ -27,7 +28,6 @@ export class PresetComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer
     ) {
-
     }
 
     ngOnInit(): void {
@@ -66,15 +66,19 @@ export class PresetComponent implements OnInit {
                 this.presetService.getPreset(params['id'])
                     .subscribe((preset) => {
                         this.preset = preset;
+                        amplitude.init(environment.amplitudeApiKey, null, { includeReferrer: true });
+                        amplitude.getInstance().logEvent('loaded-preset' + environment.postFix, { 'id': this.preset._id, 'presetFileId': this.preset.presetId });
                     },
                     (err) => {
                         console.log(err)
                     });
             }
         });
+
     }
 
     handlePlay(audioFileId: number) {
+        amplitude.getInstance().logEvent('clicked-play' + environment.postFix, { 'audioFileId': audioFileId, 'id': this.preset._id, component: 'preset' });
         this.audioService.play(audioFileId);
         this.playing = true;
     }
@@ -93,11 +97,12 @@ export class PresetComponent implements OnInit {
     }
 
     download(presetFileId: string) {
+        amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': this.preset._id, 'component': 'preset' });
         return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
     }
 
     getEmbeddedUrl(id: string) {
-     return 'http://www.youtube.com/embed/' + id;
+        return 'http://www.youtube.com/embed/' + id;
     }
 
 }

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
+declare var amplitude: any;
 
 @Component({
     selector: 'simple-upload',
@@ -34,6 +35,8 @@ export class UploadComponent {
     }
 
     ngOnInit(): void {
+        amplitude.init(environment.amplitudeApiKey);
+        amplitude.getInstance().logEvent('loaded-upload' + environment.postFix);
         this.preset = {
             _id: '',
             name: '',
@@ -159,6 +162,7 @@ export class UploadComponent {
     save(): void {
         this.presetService.savePreset(this.preset)
             .then(x => {
+                amplitude.getInstance().logEvent('clicked-save' + environment.postFix, { id: this.preset._id });
                 this.modal.open();
                 setTimeout(() => this.modal.close(), 600);
                 setTimeout(() => this.router.navigate(['/profile']), 700);;

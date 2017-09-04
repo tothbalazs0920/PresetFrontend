@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  apiRoot: "http://localhost:3001"
+  apiRoot: "http://localhost:3001",
+  amplitudeApiKey: '7303a1f3cd3faa5eaa7d2ebd58da1648',
+  postFix: '-development'  
 };
