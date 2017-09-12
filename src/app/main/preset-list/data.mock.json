@@ -18,9 +18,9 @@
             "description": "The Playstation4 is the next gen console toown.With the best games and online experience.",
             "audioFileId": "Pantera_Walk.mp3",
             "email": "tothbalazs0920@gmail.com",
-            "michrophones": [
-                "sm57"
-        ],
+            "michrophone":
+                "sm57",
+
             "cabinet": [
                 "Randall"
         ],
@@ -50,9 +50,8 @@
             "price": 899.99,
             "audioFileId": "Somwhere_in_time.mp3",
             "email": "tothbalazs0920@gmail.com",
-            "michrophones": [
-                "sm57"
-        ],
+            "michrophone":
+                "sm57",
             "cabinet": [
                 "Marshall"
         ],

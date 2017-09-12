@@ -24,7 +24,7 @@
             <!--<div ng-if="!preset.audioFileId">
               <i class="fa fa-volume-off" aria-hidden="true"></i> 
             </div> -->
-            <li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
+            <li><i class="glyphicon glyphicon-calendar"></i> <span>{{preset.created  | date: 'yyyy-MM-dd'}}</span></li>
             <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.technology}}</span></li>
             <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.presetAuthor}}</span></li>
           </ul>

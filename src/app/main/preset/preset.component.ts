@@ -40,7 +40,10 @@ export class PresetComponent implements OnInit {
             numberOfDownLoads: 0,
             amp: '',
             cabinet: '',
-            michrophones: [],
+            ampChannel: '',
+            pickupType: '',
+            michrophone: '',
+            michrophonePosition: '',
             presetAuthor: '',
             lead: true,
             clean: true,
@@ -59,7 +62,8 @@ export class PresetComponent implements OnInit {
             email: '',
             imageFileId: '',
             originalImageFileName: '',
-            youtubeUrl: ''
+            youtubeUrl: '',
+            created: null
         };
         this.activatedRoute.params.subscribe(params => {
             if (params['id']) {

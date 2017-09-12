@@ -46,7 +46,10 @@ export class UploadComponent {
             numberOfDownLoads: 0,
             amp: '',
             cabinet: '',
-            michrophones: [],
+            ampChannel: '',
+            pickupType: '',
+            michrophone: '',
+            michrophonePosition: '',
             presetAuthor: '',
             lead: true,
             clean: true,
@@ -65,7 +68,8 @@ export class UploadComponent {
             email: '',
             imageFileId: '',
             originalImageFileName: '',
-            youtubeUrl: ''
+            youtubeUrl: '',
+            created: null
         };
         this.activatedRoute
             .params

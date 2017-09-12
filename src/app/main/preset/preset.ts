@@ -7,7 +7,10 @@ export class Preset {
   numberOfDownLoads: number;
   amp: string;
   cabinet: string;
-  michrophones: string[];
+  ampChannel: string;
+  pickupType: string;
+  michrophone: string;
+  michrophonePosition: string;
   presetAuthor: string;
   lead: boolean;
   clean: boolean;
@@ -27,4 +30,5 @@ export class Preset {
   imageFileId: string;
   originalImageFileName: string;
   youtubeUrl: string;
+  created: Date
 }

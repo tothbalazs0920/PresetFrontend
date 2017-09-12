@@ -28,6 +28,10 @@
             <input type="text" required class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
         </div>
         <div class="form-group">
+            <label for="ampChannel">Amplifier channel</label>
+            <input type="text" required class="form-control" [(ngModel)]="preset.ampChannel" name="ampChannel" id="ampChannel">
+        </div>
+        <div class="form-group">
             <label for="cabinet">Cabinet</label>
             <input type="text" required class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
         </div>
@@ -57,6 +61,21 @@
         <div class="form-group">
             <label for="youtubeUrl">YouTube url</label>
             <input type="text" class="form-control" [(ngModel)]="preset.youtubeUrl" name="youtubeUrl" id="youtubeUrl">
+        </div>
+
+        <div class="form-group">
+            <label for="michrophone">Michrophone:</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.michrophone" name="michrophone" id="michrophone">
+        </div>
+
+        <div class="form-group">
+            <label for="michrophonePosition">Michrophone Position:</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.michrophonePosition" name="michrophonePosition" id="michrophonePosition">
+        </div>
+
+        <div class="form-group">
+            <label for="pickupType">Pickup type:</label>
+            <input type="text" class="form-control" [(ngModel)]="preset.pickupType" name="pickupType" id="pickupType">
         </div>
 
         <div class="form-group">
