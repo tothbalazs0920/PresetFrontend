@@ -1,17 +1,3 @@
-.panel-body {
-	min-height: 100px;
-}
-
-.two-lines {
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   line-height: 16px;     /* fallback */
-   max-height: 32px;      /* fallback */
-   -webkit-line-clamp: 1; /* number of lines to show */
-   -webkit-box-orient: vertical;
-}
-
 .pageNumber {
   display: inline-block;
   cursor: pointer;
@@ -20,7 +6,6 @@
   background-color: #F5F5F5;
   outline: none;
 }
-
 
 .userProfilePicture {
   display: inline-block;
@@ -62,4 +47,3 @@ h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; color: 
 .search-result span.plus { position: absolute; right: 0; top: 126px; }
 .search-result span.plus a {color: #fff; padding: 5px 5px 3px 5px; }
 .search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
-

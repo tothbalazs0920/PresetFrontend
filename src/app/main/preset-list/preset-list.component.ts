@@ -11,7 +11,7 @@ declare var amplitude: any;
 export class PresetListComponent implements OnInit {
   playing = false;
   current?: string;
-
+  imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images/';
 
   constructor(
     protected audioService: AudioService,
@@ -23,7 +23,7 @@ export class PresetListComponent implements OnInit {
   }
 
   handlePlay(_id: string, audioFileId: number, component: string) {
-    amplitude.getInstance().logEvent('clicked-play' + environment.postFix, {'audioFileId': audioFileId, 'id':_id, component: component});
+    amplitude.getInstance().logEvent('clicked-play' + environment.postFix, { 'audioFileId': audioFileId, 'id': _id, component: component });
     this.current = _id;
     this.audioService.play(audioFileId);
     this.playing = true;
@@ -56,8 +56,15 @@ export class PresetListComponent implements OnInit {
   }
 
   download(presetFileId: string, _id: string, component: string) {
-    amplitude.getInstance().logEvent('clicked-download' + environment.postFix, {'presetFileId': presetFileId, 'id': _id, 'component': component});
+    amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': _id, 'component': component });
     return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
+  }
+
+  getImageUrl(imagageId: string) {
+    if (imagageId) {
+      return this.imageBaseUrl + imagageId;
+    }
+    return 'https://www.shareicon.net/data/128x128/2016/05/13/764563_music_512x512.png';
   }
 
 }

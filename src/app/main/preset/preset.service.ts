@@ -4,7 +4,7 @@ import { AuthHttp } from './../auth-http/auth-http';
 import { Observable } from 'rxjs/Observable';
 import { PresetList } from './../preset-list/preset-list.interface';
 import { environment } from './../../../environments/environment';
-
+declare var amplitude: any;
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Preset } from './preset';
