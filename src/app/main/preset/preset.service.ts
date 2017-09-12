@@ -44,11 +44,20 @@ export class PresetService {
   }
 
   savePreset(preset: Preset) {
+    if (preset.youtubeUrl) {
+      preset.youtubeUrl = this.getIdFromYouTubeUrl(preset.youtubeUrl);
+    }
     return this.authHttp
       .put(this.presetUpdateUrl, preset)
       .toPromise()
       .then(response => console.log(response))
       .catch(this.handleError);
+  }
+
+  private getIdFromYouTubeUrl(url) {
+    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[7].length == 11) ? match[7] : false;
   }
 
   getEsSearchResult(q: string = '*', page = 1, technology: string) {
