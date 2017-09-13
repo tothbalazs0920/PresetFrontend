@@ -5,7 +5,9 @@
 
 export const environment = {
   production: false,
-  apiRoot: "http://localhost:3001",
+  //apiRoot: "http://localhost:3001",
+  apiRoot: "https://guitartonefinderapi-staging.herokuapp.com",
   amplitudeApiKey: '7303a1f3cd3faa5eaa7d2ebd58da1648',
-  postFix: '-development'  
+  postFix: '-development',
+  s3Postfix: '-staging'
 };

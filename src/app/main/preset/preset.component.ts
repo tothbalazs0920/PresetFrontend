@@ -18,7 +18,7 @@ import { environment } from './../../../environments/environment';
 })
 export class PresetComponent implements OnInit {
     public preset: Preset;
-    imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images/'
+    imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images' + environment.s3Postfix + '/';
     playing = false;
 
     constructor(
@@ -102,7 +102,7 @@ export class PresetComponent implements OnInit {
 
     download(presetFileId: string) {
         amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': this.preset._id, 'component': 'preset' });
-        return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets/' + presetFileId);
+        return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets' + environment.s3Postfix + '/' + presetFileId);
     }
 
     getEmbeddedUrl(id: string) {

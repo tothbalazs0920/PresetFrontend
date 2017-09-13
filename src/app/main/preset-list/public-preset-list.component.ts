@@ -29,7 +29,6 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     private _queryParamsSubscription;
     pages: any[] = [];
     paginationNumbers: number[] = [];
-    imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images/'
 
     constructor(
         private AudioService: AudioService,
@@ -84,12 +83,5 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     getPageWithSearchResult(page: number): void {
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
-    }
-
-    getImageUrl(imagageId: string) {
-        if (imagageId) {
-            return this.imageBaseUrl + imagageId;
-        }
-        return 'https://www.shareicon.net/data/128x128/2016/05/13/764563_music_512x512.png';
     }
 }
