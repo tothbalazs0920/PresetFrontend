@@ -4,7 +4,7 @@ import { AuthGuard } from './user/auth-guard.service';
 import { PublicPresetListComponent } from './preset-list/public-preset-list.component';
 import { PrivatePresetListComponent } from './preset-list/private-preset-list.component';
 import { UploadComponent } from './upload/upload.component';
-import { PresetComponent } from './Preset/preset.component';
+import { PresetComponent } from './preset/preset.component';
 
 const appRoutes: Routes = [
   {
