@@ -14,7 +14,7 @@ import { environment } from './../../../environments/environment';
 @Component({
     selector: 'preset',
     templateUrl: 'preset.component.html',
-    styleUrls: ['preset.component.css']
+    styleUrls: ['preset.component.css', './../preset-list/preset-list.component.css']
 })
 export class PresetComponent implements OnInit {
     public preset: Preset;

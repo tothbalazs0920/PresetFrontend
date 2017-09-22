@@ -1,134 +1,140 @@
 <div>
     <form #presetForm="ngForm">
-        <div class="form-group">
-            <label for="name">Name</label>
+        <div class="row">
+            <div class="col col-lg-6">
+                <div class="form-group row">
+                    <label class="col-lg-2" for="presetName">Preset name:*</label>
+                    <div class="col-lg-10">
+                        <input type="text" id="presetName" required minlength="2" maxlength="44" name="presetName" [(ngModel)]="preset.name" #presetName="ngModel">
 
-            <input type="text" id="name" class="form-control" required minlength="2" maxlength="44" name="name" [(ngModel)]="preset.name"
-                #name="ngModel">
+                        <div *ngIf="presetName.errors && (presetName.dirty || presetName.touched)" class="alert alert-danger">
+                            <div [hidden]="!name.errors.required">
+                                Preset name is required
+                            </div>
+                            <div [hidden]="!presetName.errors.minlength">
+                                Preset name must be at least 2 characters long.
+                            </div>
+                            <div [hidden]="!presetName.errors.maxlength">
+                                preset name cannot be more than 44 characters long.
+                            </div>
+                        </div>
+                    </div>
 
-            <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
-                <div [hidden]="!name.errors.required">
-                    Name is required
                 </div>
-                <div [hidden]="!name.errors.minlength">
-                    Name must be at least 2 characters long.
-                </div>
-                <div [hidden]="!name.errors.maxlength">
-                    Name cannot be more than 44 characters long.
-                </div>
-            </div>
-
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.description" name="description" id="description">
-        </div>
-        <div class="form-group">
-            <label for="amp">Amplifier</label>
-            <input type="text" required class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
-        </div>
-        <div class="form-group">
-            <label for="ampChannel">Amplifier channel</label>
-            <input type="text" required class="form-control" [(ngModel)]="preset.ampChannel" name="ampChannel" id="ampChannel">
-        </div>
-        <div class="form-group">
-            <label for="cabinet">Cabinet</label>
-            <input type="text" required class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
-        </div>
-        <div class="form-group">
-            <label for="band">Band/Artist</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.author" name="author" id="author">
-        </div>
-        <div class="form-group">
-            <label for="album">Album</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.album" name="album" id="album">
-        </div>
-        <div class="form-group">
-            <label for="band">Song Title</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.songTitle" name="songTitle" id="songTitle">
-        </div>
-        <div class="form-group">
-            <label for="description">Technology</label>
-            <div>
-                <select name="technology" id="technology" [(ngModel)]="preset.technology" required #technology="ngModel">
-                <option *ngFor="let technology of technologies" [value]="technology" >{{technology}}</option>
+                <div class="form-group row">
+                    <label for="description" class="col-lg-2">Technology:*</label>
+                    <div class="col-lg-10">
+                        <select name="technology" class="form-control" id="technology" [(ngModel)]="preset.technology" required #technology="ngModel">
+                            <option *ngFor="let technology of technologies" [value]="technology" >{{technology}}</option>
             </select>
-                <div *ngIf="technology.errors && technology.touched" class="alert alert-danger">
-                    <div [hidden]="!technology.errors.required">Technology is required</div>
+                        <div *ngIf="technology.errors && technology.touched" class="alert alert-danger">
+                            <div [hidden]="!technology.errors.required">Technology is required</div>
+                        </div>
+                    </div>
                 </div>
+                <div class="form-group row">
+                    <label for="amp" class="col-lg-2 col-form-label">Amplifier:*</label>
+                    <div class="col-lg-10">
+                        <input type="text" required class="form-control" [(ngModel)]="preset.amp" name="amp" id="amp">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2" for="ampChannel">Amplifier channel:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.ampChannel" name="ampChannel" id="ampChannel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cabinet" class="col-lg-2">Cabinet:*</label>
+                    <div class="col-lg-10">
+                        <input type="text" required class="form-control" [(ngModel)]="preset.cabinet" name="cabinet" id="cabinet">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2" for="band">Band/Artist:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.author" name="author" id="author">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="album" class="col-lg-2">Album:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.album" name="album" id="album">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="band" class="col-lg-2">Song Title:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.songTitle" name="songTitle" id="songTitle">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="youtubeUrl" class="col-lg-2">YouTube url:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.youtubeUrl" name="youtubeUrl" id="youtubeUrl">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="michrophone" class="col-lg-2">Michrophone:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.michrophone" name="michrophone" id="michrophone">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="michrophonePosition" class="col-lg-2">Michrophone Position:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" [(ngModel)]="preset.michrophonePosition" name="michrophonePosition" id="michrophonePosition">
+                    </div>
+                </div>
+
             </div>
-        </div>
-        <div class="form-group">
-            <label for="youtubeUrl">YouTube url</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.youtubeUrl" name="youtubeUrl" id="youtubeUrl">
-        </div>
+            <div class="col col-lg-6">
 
-        <div class="form-group">
-            <label for="michrophone">Michrophone:</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.michrophone" name="michrophone" id="michrophone">
-        </div>
+                <div class="form-group">
+                    <label for="description">Preset/Profile file:*</label>
+                    <div>{{preset.originalPerestFileName}}</div>
+                    <input type="file" ng2FileSelect name="presetFile" [uploader]="presetUploader" />
+                    <table class="table">
+                        <tr *ngFor="let item of presetUploader.queue">
+                        </tr>
+                    </table>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': presetUploader.progress + '%' }"></div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="michrophonePosition">Michrophone Position:</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.michrophonePosition" name="michrophonePosition" id="michrophonePosition">
-        </div>
+                <div class="form-group">
+                    <label for="description">Mp3 sample:</label>
+                    <div>{{preset.originalAudoFileName}}</div>
+                    <input type="file" ng2FileSelect name="file" [uploader]="uploader" />
+                    <table class="table">
+                        <tr *ngFor="let item of uploader.queue">
+                        </tr>
+                    </table>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="pickupType">Pickup type:</label>
-            <input type="text" class="form-control" [(ngModel)]="preset.pickupType" name="pickupType" id="pickupType">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Mp3 sample:</label>
-            <div>{{preset.originalAudoFileName}}</div>
-            <input type="file" ng2FileSelect name="file" [uploader]="uploader" />
-            <table class="table">
-                <tr *ngFor="let item of uploader.queue">
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                </tr>
-            </table>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Preset/Profile file:</label>
-            <div>{{preset.originalPerestFileName}}</div>
-            <input type="file" ng2FileSelect name="presetFile" [uploader]="presetUploader" />
-            <table class="table">
-                <tr *ngFor="let item of presetUploader.queue">
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                </tr>
-            </table>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': presetUploader.progress + '%' }"></div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Image:</label>
-            <div>{{preset.originalImageFileName}}</div>
-            <input type="file" ng2FileSelect name="image" [uploader]="imageUploader" />
-            <table class="table">
-                <tr *ngFor="let item of imageUploader.queue">
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                </tr>
-            </table>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': imageUploader.progress + '%' }"></div>
+                <div class="form-group">
+                    <label for="description">Image:</label>
+                    <div>{{preset.originalImageFileName}}</div>
+                    <input type="file" ng2FileSelect name="image" [uploader]="imageUploader" />
+                    <table class="table">
+                        <tr *ngFor="let item of imageUploader.queue">
+                        </tr>
+                    </table>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': imageUploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text" class="form-control" [(ngModel)]="preset.description" name="description" id="description" rows="3"></textarea>
+                </div>
             </div>
         </div>
 

@@ -13,7 +13,8 @@ declare var amplitude: any;
 
 @Component({
     selector: 'simple-upload',
-    templateUrl: './upload.component.html'
+    templateUrl: './upload.component.html',
+    styleUrls: ['upload.component.css']
 })
 export class UploadComponent {
     preset: Preset;
