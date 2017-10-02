@@ -7,7 +7,17 @@
     <ul class="nav navbar-nav">
       <li><a routerLink="/upload" *ngIf="CustomAuthService.loggedIn()">Upload</a></li>
       <li><a (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Upload</a></li>
-      <li><a routerLink="/profile" *ngIf="CustomAuthService.loggedIn()" routerLinkActive="active">My profiles and presets</a></li>
+      <li class="dropdown" *ngIf="CustomAuthService.loggedIn()">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">My profiles and presets <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/uploadedpresets" routerLinkActive="active">uploads</a></li>
+          <li><a routerLink="/downloadedpresets" routerLinkActive="active">downloads</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav dropdown-menu" aria-labelledby="dropdownMenu4">
+      <li><a routerLink="/uploadedpresets" routerLinkActive="active">uploads</a></li>
+      <li><a routerLink="/downloadedpresets" routerLinkActive="active">downloads</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login with Google</a></li>

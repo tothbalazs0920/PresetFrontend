@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { PresetList } from './../preset-list/preset-list.interface';
 import { environment } from './../../../environments/environment';
 declare var amplitude: any;
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Preset } from './preset';
@@ -16,6 +17,8 @@ export class PresetService {
   private presetUpdateUrl = environment.apiRoot + '/api/preset';
   private personalPresetListUrl = environment.apiRoot + '/api/preset/profile';
   private esSearchUrl = environment.apiRoot + '/api/search/';
+  private updateDownloadedPresetsUrl = environment.apiRoot + '/api/user/downloads';
+  private downloadedPresetsUrl = environment.apiRoot + '/api/mydownloads';
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
 
@@ -52,6 +55,20 @@ export class PresetService {
       .toPromise()
       .then(response => console.log(response))
       .catch(this.handleError);
+  }
+
+  updateDownloadedPreset(email, presetId) {
+    return this.authHttp
+      .put(this.updateDownloadedPresetsUrl, { 'email': email, 'presetId': presetId })
+      .toPromise();
+  }
+
+  getDownloadedPreset() {
+    return this.authHttp
+      .get(this.downloadedPresetsUrl)
+        .map((res: Response) => {
+        return res.json() as Preset[];
+      });
   }
 
   private getIdFromYouTubeUrl(url) {

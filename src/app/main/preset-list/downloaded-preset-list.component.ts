@@ -9,11 +9,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AwsService } from './../aws/aws.service';
 
 @Component({
-    selector: 'app-private-preset-list',
-    templateUrl: 'private-preset-list.component.html',
+    selector: 'app-downloaded-preset-list',
+    templateUrl: 'downloaded-preset-list.component.html',
     styleUrls: ['preset-list.component.css']
 })
-export class PrivatePresetListComponent extends PresetListComponent implements OnInit {
+export class DownloadedPresetListComponent extends PresetListComponent implements OnInit {
     presets: Preset[];
 
     constructor(
@@ -26,21 +26,13 @@ export class PrivatePresetListComponent extends PresetListComponent implements O
     }
 
     ngOnInit(): void {
-        this.presetService.getPersonalPresets()
-            .subscribe(presets => this.presets = presets);
-    }
+        if (this.CustomAuthService.loggedIn()) {
+            this.presetService.getDownloadedPreset()
+                .subscribe(
+                presets =>
+                    this.presets = presets,
+                err => console.log(err));
+        }
 
-    deletePreset(presetId: string): void {
-        this.presetService.deletePreset(presetId)
-            .then(x => {
-                this.presets = _(this.presets)
-                    .filter(function (item) {
-                        return item._id !== presetId;
-                    });
-            });
-    }
-
-    editPreset(presetId: string): void {
-        this.router.navigate(['/edit/' + presetId]);
     }
 }
