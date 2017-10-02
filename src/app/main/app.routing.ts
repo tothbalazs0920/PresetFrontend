@@ -3,6 +3,7 @@ import { AuthGuard } from './user/auth-guard.service';
 
 import { PublicPresetListComponent } from './preset-list/public-preset-list.component';
 import { PrivatePresetListComponent } from './preset-list/private-preset-list.component';
+import { DownloadedPresetListComponent } from './preset-list/downloaded-preset-list.component';
 import { UploadComponent } from './upload/upload.component';
 import { PresetComponent } from './preset/preset.component';
 
@@ -21,8 +22,13 @@ const appRoutes: Routes = [
     component: PresetComponent
   },
   {
-    path: 'profile',
+    path: 'uploadedpresets',
     component: PrivatePresetListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'downloadedpresets',
+    component: DownloadedPresetListComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -39,4 +45,4 @@ const appRoutes: Routes = [
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, UploadComponent, PresetComponent];
+export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, DownloadedPresetListComponent, UploadComponent, PresetComponent];

@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+import { Injectable, OnInit } from '@angular/core';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class CustomAuthService {
+export class CustomAuthService implements OnInit {
 
   constructor(private router: Router) {
+  }
+
+  ngOnInit() {
   }
 
   logout() {
@@ -19,4 +22,14 @@ export class CustomAuthService {
     // name of the key in local storage
     return tokenNotExpired('token');
   }
+
+  getEmail() {
+    let jwtHelper = new JwtHelper();
+    let token = localStorage.getItem('token');
+    let user = jwtHelper.decodeToken(token);
+    if(user) {
+      return user.email;
+    }
+  }
+  
 }

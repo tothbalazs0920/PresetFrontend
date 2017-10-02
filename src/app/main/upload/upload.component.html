@@ -5,19 +5,7 @@
                 <div class="form-group row">
                     <label class="col-lg-2" for="presetName">Preset name:*</label>
                     <div class="col-lg-10">
-                        <input type="text" id="presetName" required minlength="2" maxlength="44" name="presetName" [(ngModel)]="preset.name" #presetName="ngModel">
-
-                        <div *ngIf="presetName.errors && (presetName.dirty || presetName.touched)" class="alert alert-danger">
-                            <div [hidden]="!name.errors.required">
-                                Preset name is required
-                            </div>
-                            <div [hidden]="!presetName.errors.minlength">
-                                Preset name must be at least 2 characters long.
-                            </div>
-                            <div [hidden]="!presetName.errors.maxlength">
-                                preset name cannot be more than 44 characters long.
-                            </div>
-                        </div>
+                        <input type="text" id="presetName" required name="presetName" [(ngModel)]="preset.name" #presetName="ngModel">
                     </div>
 
                 </div>

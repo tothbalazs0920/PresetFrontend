@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AudioService } from './../audio-player/audio.service';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
+import { PresetService } from './../preset/preset.service';
 declare var amplitude: any;
 
 @Component({
@@ -15,7 +16,8 @@ export class PresetListComponent implements OnInit {
 
   constructor(
     protected audioService: AudioService,
-    protected awsService: AwsService) {
+    protected awsService: AwsService,
+    protected presetService: PresetService, ) {
   }
 
   ngOnInit(): void {
@@ -54,12 +56,15 @@ export class PresetListComponent implements OnInit {
     }
     return false;
   }
-
+/*
   download(presetFileId: string, _id: string, component: string) {
+    //getEmail();
+    //this.presetService.updateDownloadedPreset()
     amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': _id, 'component': component });
+
     return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets' + environment.s3Postfix + '/' + presetFileId);
   }
-
+*/
   getImageUrl(imagageId: string) {
     if (imagageId) {
       return this.imageBaseUrl + imagageId;

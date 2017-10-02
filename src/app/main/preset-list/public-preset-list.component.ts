@@ -32,13 +32,13 @@ export class PublicPresetListComponent extends PresetListComponent implements On
 
     constructor(
         private AudioService: AudioService,
-        private presetService: PresetService,
+        protected presetService: PresetService,
         private CustomAuthService: CustomAuthService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         protected awsService: AwsService
     ) {
-        super(AudioService, awsService);
+        super(AudioService, awsService, presetService);
     }
 
     ngOnInit(): void {
@@ -83,5 +83,14 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     getPageWithSearchResult(page: number): void {
         this.queryObject.page = page;
         this.router.navigate(['/presets'], { queryParams: this.queryObject });
+    }
+
+    download(presetFileId: string, _id: string, component: string) {
+        if (this.CustomAuthService.loggedIn()) {
+            let email = this.CustomAuthService.getEmail();
+            this.presetService.updateDownloadedPreset(email, _id);
+        }
+            amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': _id, 'component': component });
+            return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets' + environment.s3Postfix + '/' + presetFileId);
     }
 }
