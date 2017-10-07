@@ -1,0 +1,7 @@
+<div><p>Profile</p></div>
+<div *ngIf="!connectedToStripe">
+<a class="stripe-connect" (click) = "redirectToStripe()" ><span>Connect with Stripe</span></a>
+</div>
+<div *ngIf="connectedToStripe">
+   <p>Successfully connected with Stripe</p>
+</div>

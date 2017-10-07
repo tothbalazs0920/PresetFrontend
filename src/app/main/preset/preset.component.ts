@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import { DomSanitizer } from '@angular/platform-browser';
 declare var amplitude: any;
 import { environment } from './../../../environments/environment';
+import { CheckoutService } from './../checkout/checkout.service';
 
 @Component({
     selector: 'preset',
@@ -26,7 +27,8 @@ export class PresetComponent implements OnInit {
         private presetService: PresetService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private checkoutService: CheckoutService
     ) {
     }
 
@@ -114,6 +116,12 @@ export class PresetComponent implements OnInit {
             return this.imageBaseUrl + imagageId;
         }
         return 'https://www.shareicon.net/data/128x128/2016/05/13/764563_music_512x512.png';
+    }
+
+    buy() {
+        this.checkoutService.openCheckout(this.preset.name, this.preset.price * 100, this.preset.currency, (token: any) =>
+            this.checkoutService.takePayment(this.preset.price * 100, this.preset.currency, 
+                this.preset._id, this.preset.email , token));
     }
 
 }
