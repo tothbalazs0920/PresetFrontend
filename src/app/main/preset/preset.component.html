@@ -1,57 +1,62 @@
-  <section class="col-xs-12 col-sm-6 col-md-12">
+<section class="col-xs-12 col-sm-6 col-md-12">
 
-      <article class="search-result row">
-        <div class="col-xs-12 col-sm-12 col-md-3">
-          <a title="{{preset.amp}}" class="thumbnail">
+  <article class="search-result row">
+    <div class="col-xs-12 col-sm-12 col-md-3">
+      <a title="{{preset.amp}}" class="thumbnail">
             <img src="{{ getImageUrl(preset.imageFileId) }}"/>
           </a>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-2">
-          <ul class="meta-search">
-            <div ng-if="preset.audioFileId">
-              <audio-player (play)="handlePlay(preset._id, preset.audioFileId, 'public-preset-list') " (pause)="handlePause(preset._id)
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-2">
+      <ul class="meta-search">
+        <div ng-if="preset.audioFileId">
+          <audio-player (play)="handlePlay(preset._id, preset.audioFileId, 'public-preset-list') " (pause)="handlePause(preset._id)
         " [showPause]="showPause(preset._id) " [showPlay]="showPlay(preset._id) "></audio-player>
-            </div>
-            <!--<div ng-if="!preset.audioFileId">
+        </div>
+        <!--<div ng-if="!preset.audioFileId">
               <i class="fa fa-volume-off" aria-hidden="true"></i> 
             </div> -->
-            <li><i class="glyphicon glyphicon-calendar"></i> <span>{{preset.created  | date: 'yyyy-MM-dd'}}</span></li>
-            <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.technology}}</span></li>
-            <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.presetAuthor}}</span></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-          <h3>{{preset.name}}</h3>
-          <p>Amplifier: {{preset.amp}}</p>
-          <p>Cabinet: {{preset.cabinet}}</p>
-          <p>Perest file name: {{preset.originalPerestFileName}}</p>
-          
-            <p>
-              <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'public-preset-list')">Download</a></span>
-        </div>
-        <span class="clearfix borda"></span>
-      </article>
-    
-  </section>
+        <li><i class="glyphicon glyphicon-calendar"></i> <span>{{preset.created  | date: 'yyyy-MM-dd'}}</span></li>
+        <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.technology}}</span></li>
+        <li><i class="glyphicon glyphicon-tags"></i> <span>{{preset.presetAuthor}}</span></li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+      <h3>{{preset.name}}</h3>
+      <p>Amplifier: {{preset.amp}}</p>
+      <p>Cabinet: {{preset.cabinet}}</p>
+      <p>Perest file name: {{preset.originalPerestFileName}}</p>
+      <div *ngIf="!preset.price">
+        <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'preset')">Download</a></span>
+      </div>
+      <div *ngIf="preset.price">
+          <button type="submit" class="plus btn btn-primary" (click)="buy()">Buy ({{preset.price}} {{preset.currency}})</button>
+      </div>
+    </div>
+    <span class="clearfix borda"></span>
+  </article>
+
+</section>
 
 <div class="row">
 
-    <h3>Other optional info:</h3>
-    <p>Description: {{preset.description}}
-    <div>Amplifier channel: {{preset.ampChannel}}</div>
-    <div>Cabinet: {{preset.cabinet}}</div>
-    <p>Album: {{preset.album}} </p>
-    <p>Song title: {{preset.songTitle}}</p>
-    <p>Band/Artist: {{preset.author}}</p>
-    <p>Michrophone: {{preset.michrophone}}</p>
-    <p>Michrophone position: {{preset.michrophonePosition}}</p> 
+  <h3>Other optional info:</h3>
+  <p>Price: {{preset.price}} {{preset.currency}}</p>
+  <p>Description: {{preset.description}}</p>
+  <div>Amplifier channel: {{preset.ampChannel}}</div>
+  <div>Cabinet: {{preset.cabinet}}</div>
+  <p>Album: {{preset.album}} </p>
+  <p>Song title: {{preset.songTitle}}</p>
+  <p>Band/Artist: {{preset.author}}</p>
+  <p>Michrophone: {{preset.michrophone}}</p>
+  <p>Michrophone position: {{preset.michrophonePosition}}</p>
+  <button type="submit" class="btn btn-default" (click)="buy()">Buy ({{preset.price}} {{preset.currency}})</button>
 
-    <div *ngIf="preset.youtubeUrl">
-        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" width="560" height="315" frameborder="0"
-            allowfullscreen>
-        </iframe>
-    </div>
+  <div *ngIf="preset.youtubeUrl">
+    <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" width="560" height="315" frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
 
-    <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
+  <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
 
 </div>

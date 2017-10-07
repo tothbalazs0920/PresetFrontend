@@ -8,6 +8,7 @@ import { routing, routedComponents } from './app.routing';
 import { AudioPlayer } from './audio-player/audio-player.component';
 
 import { PresetService } from './preset/preset.service';
+import { CheckoutService } from './checkout/checkout.service';
 import { CustomAuthService } from './user/auth.service';
 import { AuthGuard } from './user/auth-guard.service';
 import { AudioService } from './audio-player/audio.service';
@@ -43,6 +44,7 @@ import { SearchField } from './search-field/search-field.component';
       deps: [XHRBackend, RequestOptions]
     },
     PresetService,
+    CheckoutService,
     CustomAuthService,
     AuthGuard,
     AudioService,

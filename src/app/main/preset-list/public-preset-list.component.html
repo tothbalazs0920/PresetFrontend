@@ -33,8 +33,10 @@
           <h3><a [routerLink]="['/preset', preset._id]" title="{{preset.name}}">{{preset.name}}</a></h3>
           <p>Amplifier: {{preset.amp}}</p>
           <p>Cabinet: {{preset.cabinet}}</p>
-          <p>{{preset.description}}
-            <p>
+        <div *ngIf="preset.price">
+            <p>Price: {{preset.price}} {{preset.currency}}</p>
+          </div>
+          <p>{{preset.description}}<p>
               <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'public-preset-list')">Download</a></span>
         </div>
         <span class="clearfix borda"></span>

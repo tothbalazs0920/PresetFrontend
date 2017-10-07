@@ -11,5 +11,6 @@ export const environment = {
   // postFix: '-development',
   postFix: '',
   // s3Postfix: '-staging',
-  s3Postfix: ''
+  s3Postfix: '',
+  stripeClientId: 'ca_BWePa4eb31deUqLyDTXduRf5DhaMHBa0'
 };
