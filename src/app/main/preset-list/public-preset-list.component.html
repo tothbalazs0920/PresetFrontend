@@ -33,11 +33,13 @@
           <h3><a [routerLink]="['/preset', preset._id]" title="{{preset.name}}">{{preset.name}}</a></h3>
           <p>Amplifier: {{preset.amp}}</p>
           <p>Cabinet: {{preset.cabinet}}</p>
-        <div *ngIf="preset.price">
-            <p>Price: {{preset.price}} {{preset.currency}}</p>
+          <div *ngIf="!preset.price">
+            <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'preset')">Download</a></span>
           </div>
-          <p>{{preset.description}}<p>
-              <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'public-preset-list')">Download</a></span>
+          <div *ngIf="preset.price">
+            <span class="plus"><button type="submit" class="plus btn btn-primary" (click)="buy(preset._id, preset.name, preset.price, preset.currency, preset.email)" *ngIf="CustomAuthService.loggedIn()">Buy ({{preset.price}} {{preset.currency}})</button></span>
+            <span class="plus"><button type="submit" class="plus btn btn-primary" (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Buy ({{preset.price}} {{preset.currency}})</button></span>
+          </div>
         </div>
         <span class="clearfix borda"></span>
       </article>
@@ -54,3 +56,12 @@
     </ul>
   </div>
 </div>
+
+<modal #loginModal>
+  <modal-body>
+    <p>You need to log in to be able to purchase.</p>
+    <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">  
+        Login with Google
+        </button>
+  </modal-body>
+</modal>

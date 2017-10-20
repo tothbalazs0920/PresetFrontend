@@ -10,6 +10,7 @@ import 'rxjs/add/observable/of';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
 declare var amplitude: any;
+import { CheckoutService } from './../checkout/checkout.service';
 
 @Component({
     selector: 'simple-upload',
@@ -26,13 +27,15 @@ export class UploadComponent {
     @ViewChild('myModal')
     modal: ModalComponent;
     technologies = ['Kemper', 'Axe Fx II', 'AX8', 'FX-8', 'Helix', 'G-system', 'Bias'];
+    connectedToStripe;
 
     constructor(
         private CustomAuthService: CustomAuthService,
         private presetService: PresetService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private awsService: AwsService) {
+        private awsService: AwsService,
+        private checkoutService: CheckoutService) {
     }
 
     ngOnInit(): void {
@@ -72,6 +75,16 @@ export class UploadComponent {
             youtubeUrl: '',
             created: null
         };
+
+        this.checkoutService.isStripeConnected()
+        .then((result) => {
+            if (result._body === 'true') {
+                this.connectedToStripe = true;
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+
         this.activatedRoute
             .params
             .flatMap(
@@ -166,11 +179,18 @@ export class UploadComponent {
 
     save(): void {
         this.presetService.savePreset(this.preset)
-            .then(x => {
+            .then((preset) => {
                 amplitude.getInstance().logEvent('clicked-save' + environment.postFix, { id: this.preset._id });
                 this.modal.open();
                 setTimeout(() => this.modal.close(), 600);
-                setTimeout(() => this.router.navigate(['/profile']), 700);;
+                setTimeout(() => this.router.navigate(['/preset', preset._id]), 700);;
             });
+    }
+
+    redirectToStripe() {
+        // localStorage.setItem("stripeState", );
+        window.location.href=
+            'https://connect.stripe.com/oauth/authorize?response_type=code&client_id=' +
+            environment.stripeClientId + '&scope=read_write';
     }
 }

@@ -32,6 +32,7 @@
 
 <modal #loginModal>
   <modal-body>
+      <p>You need to log in to be able to upload presets.</p>
     <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">
         Login with Google
       </button>

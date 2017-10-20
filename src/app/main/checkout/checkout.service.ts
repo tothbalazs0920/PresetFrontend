@@ -26,15 +26,12 @@ export class CheckoutService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        this.authHttp.post(this.stripePayment, bodyString, options)
+        return this.authHttp.post(this.stripePayment, bodyString, options)
             .toPromise()
             .then((res) => {
-                console.log(res);
-                // this.takePaymentResult = res.json().status;
-            })
-            .catch((error) => {
-                console.log(error);
-                // this.takePaymentResult = error.message
+                return { success: true, message: "" };
+            }).catch((error) => {
+                return { success: false, message: error.message };
             });
     }
 
