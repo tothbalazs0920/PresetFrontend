@@ -77,18 +77,39 @@
                         <input type="text" class="form-control" [(ngModel)]="preset.michrophonePosition" name="michrophonePosition" id="michrophonePosition">
                     </div>
                 </div>
+                <div *ngIf="connectedToStripe">
+                    <div class="form-group row">
+                        <label for="price" class="col-lg-2">Price:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" [(ngModel)]="preset.price" name="price" id="price">
+                        </div>
+                    </div>
 
-                <div class="form-group row">
-                    <label for="price" class="col-lg-2">Price:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" [(ngModel)]="preset.price" name="price" id="price">
+                    <div class="form-group row">
+                        <label for="currency" class="col-lg-2">Currency:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" [(ngModel)]="preset.currency" name="currency" id="currency">
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="currency" class="col-lg-2">Currency:</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" [(ngModel)]="preset.currency" name="currency" id="currency">
+                <div *ngIf="!connectedToStripe">
+                    <p>If you want to sell presets, you need to connect your Stripe account to the Stripe account of Guitar
+                        Tone Finder.</p>
+                    <p>You can connect and set up your Stripe account by clicking on the button below.</p>
+                    <a class="stripe-connect" (click)="redirectToStripe()"><span>Connect with Stripe</span></a>
+                    <div class="form-group row">
+                        <label for="price" class="col-lg-2">Price:</label>
+                        <div class="col-lg-10">
+                            <input readonly type="text" class="form-control" [(ngModel)]="preset.price" name="price" id="price">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="currency" class="col-lg-2">Currency:</label>
+                        <div class="col-lg-10">
+                            <input readonly type="text" class="form-control" [(ngModel)]="preset.currency" name="currency" id="currency">
+                        </div>
                     </div>
                 </div>
 

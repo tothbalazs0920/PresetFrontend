@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomAuthService } from './../user/auth.service';
 
 import { Preset } from './../preset/preset';
@@ -11,6 +11,8 @@ import * as _ from 'underscore';
 import { environment } from './../../../environments/environment';
 import { AwsService } from './../aws/aws.service';
 declare var amplitude: any;
+import { CheckoutService } from './../checkout/checkout.service';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @Component({
     selector: 'preset-list',
@@ -29,6 +31,8 @@ export class PublicPresetListComponent extends PresetListComponent implements On
     private _queryParamsSubscription;
     pages: any[] = [];
     paginationNumbers: number[] = [];
+    @ViewChild('loginModal')
+    modal: ModalComponent;
 
     constructor(
         private AudioService: AudioService,
@@ -36,7 +40,8 @@ export class PublicPresetListComponent extends PresetListComponent implements On
         private CustomAuthService: CustomAuthService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        protected awsService: AwsService
+        protected awsService: AwsService,
+        private checkoutService: CheckoutService
     ) {
         super(AudioService, awsService, presetService);
     }
@@ -90,7 +95,24 @@ export class PublicPresetListComponent extends PresetListComponent implements On
             let email = this.CustomAuthService.getEmail();
             this.presetService.updateDownloadedPreset(email, _id);
         }
-            amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': _id, 'component': component });
-            return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets' + environment.s3Postfix + '/' + presetFileId);
+        amplitude.getInstance().logEvent('clicked-download' + environment.postFix, { 'presetFileId': presetFileId, 'id': _id, 'component': component });
+        return window.open('https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-presets' + environment.s3Postfix + '/' + presetFileId);
+    }
+
+    buy(id, name, price, currency, email) {
+        this.checkoutService.openCheckout(name, price * 100, currency, (token: any) => {
+            this.checkoutService.takePayment(price * 100, currency,
+                id, email, token).then((result) => {
+                    if (result.success) {
+                        this.router.navigate(['/preset', id]);
+                    }
+                }).catch((error) => {
+                    console.log(error.message);
+                });
+        });
+    }
+
+    redirect() {
+        window.location.href = environment.apiRoot + '/auth/google';
     }
 }

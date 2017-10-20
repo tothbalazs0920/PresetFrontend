@@ -25,11 +25,12 @@
       <p>Amplifier: {{preset.amp}}</p>
       <p>Cabinet: {{preset.cabinet}}</p>
       <p>Perest file name: {{preset.originalPerestFileName}}</p>
-      <div *ngIf="!preset.price">
+      <div *ngIf="!preset.price || downloadable">
         <span class="plus btn btn-primary"><a href="#" (click)="download(preset.presetId, preset._id, 'preset')">Download</a></span>
       </div>
-      <div *ngIf="preset.price">
-          <button type="submit" class="plus btn btn-primary" (click)="buy()">Buy ({{preset.price}} {{preset.currency}})</button>
+      <div *ngIf="preset.price && !downloadable">
+          <button type="submit" class="plus btn btn-primary" (click)="buy()" *ngIf="CustomAuthService.loggedIn()">Buy ({{preset.price}} {{preset.currency}})</button>
+          <button type="submit" class="plus btn btn-primary" (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Buy ({{preset.price}} {{preset.currency}})</button>
       </div>
     </div>
     <span class="clearfix borda"></span>
@@ -49,7 +50,6 @@
   <p>Band/Artist: {{preset.author}}</p>
   <p>Michrophone: {{preset.michrophone}}</p>
   <p>Michrophone position: {{preset.michrophonePosition}}</p>
-  <button type="submit" class="btn btn-default" (click)="buy()">Buy ({{preset.price}} {{preset.currency}})</button>
 
   <div *ngIf="preset.youtubeUrl">
     <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" width="560" height="315" frameborder="0"
@@ -60,3 +60,12 @@
   <div class="userProfilePicture" [ngStyle]="{'background-image': 'url(' + preset.profilePicture + ')'}"></div>
 
 </div>
+
+<modal #loginModal>
+    <modal-body>
+        <p>You need to log in to be able to purchase.</p>
+      <button class="loginBtn loginBtn--google" (click)="redirect()" *ngIf="!CustomAuthService.loggedIn()">
+          Login with Google
+        </button>
+    </modal-body>
+  </modal>

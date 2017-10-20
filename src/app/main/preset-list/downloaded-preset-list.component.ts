@@ -28,8 +28,7 @@ export class DownloadedPresetListComponent extends PresetListComponent implement
     ngOnInit(): void {
         if (this.CustomAuthService.loggedIn()) {
             this.presetService.getDownloadedPreset()
-                .subscribe(
-                presets =>
+                .subscribe(presets =>
                     this.presets = presets,
                 err => console.log(err));
         }

@@ -53,8 +53,10 @@ export class PresetService {
     return this.authHttp
       .put(this.presetUpdateUrl, preset)
       .toPromise()
-      .then(response => console.log(response))
-      .catch(this.handleError);
+      .then((response) => {
+        console.log(response);
+        return response.json() as Preset;
+      }).catch(this.handleError);
   }
 
   updateDownloadedPreset(email, presetId) {
@@ -66,8 +68,25 @@ export class PresetService {
   getDownloadedPreset() {
     return this.authHttp
       .get(this.downloadedPresetsUrl)
-        .map((res: Response) => {
+      .map((res: Response) => {
         return res.json() as Preset[];
+      });
+  }
+
+  isPresetDownLoaded(id) {
+    return this.authHttp
+      .get(this.downloadedPresetsUrl)
+      .map((res: Response) => {
+        let presets = res.json() as Preset[];
+        let found = presets.find(x => x._id === id);
+        if (found) {
+          return true;
+        }
+        return false;
+      },
+      err => {
+        console.log(err)
+        return false;
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Preset } from './../preset/preset';
 import { PresetService } from './../preset/preset.service';
@@ -11,6 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 declare var amplitude: any;
 import { environment } from './../../../environments/environment';
 import { CheckoutService } from './../checkout/checkout.service';
+import { CustomAuthService } from './../user/auth.service';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @Component({
     selector: 'preset',
@@ -21,6 +23,9 @@ export class PresetComponent implements OnInit {
     public preset: Preset;
     imageBaseUrl = 'https://s3-eu-west-1.amazonaws.com/guitar-tone-finder-images' + environment.s3Postfix + '/';
     playing = false;
+    downloadable = false;
+    @ViewChild('loginModal')
+    modal: ModalComponent;
 
     constructor(
         private audioService: AudioService,
@@ -28,9 +33,9 @@ export class PresetComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer,
-        private checkoutService: CheckoutService
-    ) {
-    }
+        private checkoutService: CheckoutService,
+        private CustomAuthService: CustomAuthService
+    ) { }
 
     ngOnInit(): void {
         this.preset = {
@@ -67,11 +72,21 @@ export class PresetComponent implements OnInit {
             youtubeUrl: '',
             created: null
         };
-        this.activatedRoute.params.subscribe(params => {
+        this.activatedRoute.params.subscribe((params) => {
             if (params['id']) {
                 this.presetService.getPreset(params['id'])
                     .subscribe((preset) => {
                         this.preset = preset;
+                        if (this.CustomAuthService.loggedIn()) {
+                            if (preset.email === this.CustomAuthService.getEmail()) {
+                                this.downloadable = true;
+                            }
+                            this.presetService.isPresetDownLoaded(preset._id).subscribe((result) => {
+                                if (result) {
+                                    this.downloadable = true;
+                                }
+                            });
+                        }
                         amplitude.init(environment.amplitudeApiKey, null, { includeReferrer: true });
                         amplitude.getInstance().logEvent('loaded-preset' + environment.postFix, { 'id': this.preset._id, 'presetFileId': this.preset.presetId });
                     },
@@ -80,7 +95,6 @@ export class PresetComponent implements OnInit {
                     });
             }
         });
-
     }
 
     handlePlay(audioFileId: number) {
@@ -119,9 +133,20 @@ export class PresetComponent implements OnInit {
     }
 
     buy() {
-        this.checkoutService.openCheckout(this.preset.name, this.preset.price * 100, this.preset.currency, (token: any) =>
-            this.checkoutService.takePayment(this.preset.price * 100, this.preset.currency, 
-                this.preset._id, this.preset.email , token));
+        this.checkoutService.openCheckout(this.preset.name, this.preset.price * 100, this.preset.currency, (token: any) => {
+            this.checkoutService.takePayment(this.preset.price * 100, this.preset.currency,
+                this.preset._id, this.preset.email, token).then((result) => {
+                    if (result.success) {
+                        this.downloadable = true;
+                    }
+                }).catch((error) => {
+                    this.downloadable = false;
+                    console.log(error.message);
+                });
+        });
     }
 
+    redirect() {
+        window.location.href = environment.apiRoot + '/auth/google';
+    }
 }
