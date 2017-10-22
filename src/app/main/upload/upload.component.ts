@@ -26,8 +26,10 @@ export class UploadComponent {
     public hasAnotherDropZoneOver: boolean = false;
     @ViewChild('myModal')
     modal: ModalComponent;
-    technologies = ['Kemper', 'Axe Fx II', 'AX8', 'FX-8', 'Helix', 'G-system', 'Bias'];
+    technologies = ['Kemper', 'Axe Fx II', 'AX8', 'Helix', 'Bias'];
+    currenceis = ['usd', 'eur', 'dkk'];
     connectedToStripe;
+    optional = false;
 
     constructor(
         private CustomAuthService: CustomAuthService,
@@ -91,6 +93,7 @@ export class UploadComponent {
             params => {
                 this.preset = new Preset();
                 this.preset._id = this.objectId();
+                this.preset.technology = 'Kemper';
                 if (params['id']) {
                     return this.presetService.getPreset(params['id']);
                 } else {
@@ -192,5 +195,9 @@ export class UploadComponent {
         window.location.href=
             'https://connect.stripe.com/oauth/authorize?response_type=code&client_id=' +
             environment.stripeClientId + '&scope=read_write';
+    }
+
+    public setTechnology(technology: string): void {
+        this.preset.technology = technology;
     }
 }
