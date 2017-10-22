@@ -8,7 +8,7 @@
       <li><a routerLink="/upload" *ngIf="CustomAuthService.loggedIn()">Upload</a></li>
       <li><a (click)="this.modal.open();" *ngIf="!CustomAuthService.loggedIn()">Upload</a></li>
       <li class="dropdown" *ngIf="CustomAuthService.loggedIn()">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">My profiles and presets <b class="caret"></b></a>
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">My presets <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a routerLink="/uploadedpresets" routerLinkActive="active">uploads</a></li>
           <li><a routerLink="/downloadedpresets" routerLinkActive="active">downloads</a></li>
