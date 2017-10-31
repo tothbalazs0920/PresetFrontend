@@ -6,7 +6,9 @@ import { PrivatePresetListComponent } from './preset-list/private-preset-list.co
 import { DownloadedPresetListComponent } from './preset-list/downloaded-preset-list.component';
 import { UploadComponent } from './upload/upload.component';
 import { PresetComponent } from './preset/preset.component';
-import { ProfileComponent } from './profile/profile.component';
+import { SellComponent } from './sell/sell.component';
+import { ContactComponent } from './contact/contact.component';
+import { TermsComponent } from './terms/terms.component';
 
 const appRoutes: Routes = [
   {
@@ -43,13 +45,20 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
+    path: 'sell',
+    component: SellComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsComponent
   }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
 
 export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, 
-  DownloadedPresetListComponent, UploadComponent, PresetComponent, ProfileComponent];
+  DownloadedPresetListComponent, UploadComponent, PresetComponent, SellComponent, ContactComponent, TermsComponent];

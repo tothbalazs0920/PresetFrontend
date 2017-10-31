@@ -40,8 +40,7 @@
 
 <div class="row">
 
-  <h3>Other optional info:</h3>
-  <p>Price: {{preset.price}} {{preset.currency}}</p>
+  <h3>Other optional info:</h3> 
   <p>Description: {{preset.description}}</p>
   <div>Amplifier channel: {{preset.ampChannel}}</div>
   <div>Cabinet: {{preset.cabinet}}</div>
@@ -49,7 +48,6 @@
   <p>Song title: {{preset.songTitle}}</p>
   <p>Band/Artist: {{preset.author}}</p>
   <p>Michrophone: {{preset.michrophone}}</p>
-  <p>Michrophone position: {{preset.michrophonePosition}}</p>
 
   <div *ngIf="preset.youtubeUrl">
     <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(getEmbeddedUrl(preset.youtubeUrl))" width="560" height="315" frameborder="0"

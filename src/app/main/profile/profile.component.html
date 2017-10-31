@@ -1,9 +1,0 @@
-<div><p>Profile</p></div>
-<div *ngIf="!connectedToStripe">
-    <p>If you want to sell presets, you need to connect your Stripe account to the Stripe account of Guitar Tone Finder.</p>
-    <p>You can connect and set up your Stripe account by clicking on the button below.</p>
-<a class="stripe-connect" (click) = "redirectToStripe()" ><span>Connect with Stripe</span></a>
-</div>
-<div *ngIf="connectedToStripe">
-   <p>Successfully connected with Stripe</p>
-</div>
