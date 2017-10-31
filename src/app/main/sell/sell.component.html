@@ -1,0 +1,16 @@
+<div>
+    <p>Pricing for sellers:</p>
+    <p>7% transaction fee</p>
+    <p>Additionally Stripe charges for payment proccessing:</p>
+    <p>1.4% + 1.80kr for European cards and</p>
+    <p>2.9% + 1.80kr for non-European cards.</p>
+    <a href="https://stripe.com/dk/pricing">Read more about Stripe pricing</a>
+</div>
+<div *ngIf="!connectedToStripe">
+    <p>If you want to sell presets, you need to connect your Stripe account to the Stripe account of Guitar Tone Finder.</p>
+    <p>You can connect and set up your Stripe account by clicking on the button below.</p>
+    <a class="stripe-connect" (click)="redirectToStripe()"><span>Connect with Stripe</span></a>
+</div>
+<div *ngIf="connectedToStripe">
+    <p>Successfully connected with Stripe</p>
+</div>

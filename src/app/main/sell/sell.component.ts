@@ -6,11 +6,11 @@ import { environment } from './../../../environments/environment';
 import { CheckoutService } from './../checkout/checkout.service';
 
 @Component({
-    selector: 'preset',
-    templateUrl: 'profile.component.html',
-    styleUrls: ['profile.component.css']
+    selector: 'sellInfo',
+    templateUrl: 'sell.component.html',
+    styleUrls: ['sell.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class SellComponent implements OnInit {
 
     connectedToStripe: boolean;
 
