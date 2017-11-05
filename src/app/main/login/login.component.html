@@ -1,0 +1,11 @@
+<p>First you need to sign up with Google</p>
+<button class="btn btn-primary" (click)="login()">
+        Login with Google
+      </button>
+<form id="signupform" role="form"></form>
+<div class="checkbox">
+    <label><input type="checkbox" [(ngModel)]="acceptTerms" value="">I accept <a routerLink="/terms">Terms and Conditions</a></label>
+</div>
+<button class="btn btn-primary" [disabled]="!acceptTerms" (click)="signup()">
+          Sign up with Google
+        </button>

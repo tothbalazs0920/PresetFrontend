@@ -9,6 +9,8 @@ import { PresetComponent } from './preset/preset.component';
 import { SellComponent } from './sell/sell.component';
 import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
+import { ErrorComponent } from './error/error.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {
@@ -55,10 +57,19 @@ const appRoutes: Routes = [
   {
     path: 'terms-and-conditions',
     component: TermsComponent
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
 
 export const routedComponents = [PublicPresetListComponent, PrivatePresetListComponent, 
-  DownloadedPresetListComponent, UploadComponent, PresetComponent, SellComponent, ContactComponent, TermsComponent];
+  DownloadedPresetListComponent, UploadComponent, PresetComponent, SellComponent, 
+  ContactComponent, TermsComponent, ErrorComponent, LoginComponent];
