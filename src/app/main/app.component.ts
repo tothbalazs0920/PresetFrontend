@@ -16,7 +16,11 @@ export class AppComponent {
 
   constructor(private CustomAuthService: CustomAuthService) { }
 
-  redirect() {
+  login() {
     window.location.href = environment.apiRoot + '/auth/google';
+  }
+
+  signup() {
+    window.location.href = environment.apiRoot + '/signup/google';
   }
 }
