@@ -97,7 +97,7 @@ export class PresetComponent implements OnInit {
         });
     }
 
-    handlePlay(audioFileId: number) {
+    handlePlay(_id: string, audioFileId: number, component: string) {
         amplitude.getInstance().logEvent('clicked-play' + environment.postFix, { 'audioFileId': audioFileId, 'id': this.preset._id, component: 'preset' });
         this.audioService.play(audioFileId);
         this.playing = true;
